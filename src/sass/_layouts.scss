@@ -1,0 +1,282 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  font-family: "Rubik", sans-serif;
+  background-color: var(--light-gray);
+  padding: 1.5rem 1rem 0;
+}
+
+main {
+  margin: auto;
+}
+
+.footer {
+  width: 100%;
+  margin-top: auto;
+  padding: 1rem;
+}
+
+.container {
+  max-width: 700px;
+}
+
+.comment {
+  background-color: var(--white);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "user user"
+    "comment comment"
+    "votting actions";
+
+  @media screen and (min-width: $bp-medium) {
+    grid-template-columns: auto auto auto;
+
+    grid-template-areas:
+      "votting user actions"
+      "votting comment comment";
+
+    // voting section
+    .comment-votting {
+      flex-direction: column;
+      margin-bottom: auto;
+    }
+  }
+
+  // User section
+  .comment-user {
+    grid-area: user;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .avater {
+      max-width: 2rem;
+    }
+
+    .username {
+      color: var(--dark-blue);
+      font-weight: 500;
+    }
+
+    .you-txt {
+      background-color: var(--moderate-blue);
+      color: var(--white);
+      padding: 0 0.3rem;
+      display: inline-block;
+      border-radius: 2px;
+      font-size: 0.8rem;
+      margin: -0.5rem;
+    }
+
+    .created-at {
+      color: var(--grayish-blue);
+    }
+  }
+
+  // comment content
+  .comment-content {
+    grid-area: comment;
+    color: var(--grayish-blue);
+
+    .to-replied-username {
+      color: var(--moderate-blue);
+      font-weight: 500;
+    }
+  }
+
+  // voting section
+  .comment-votting {
+    grid-area: votting;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    width: max-content;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    overflow: hidden;
+
+    .score {
+      color: var(--moderate-blue);
+      font-weight: 500;
+    }
+
+    .btn-votting {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      height: 2rem;
+      width: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:active {
+        filter: saturate(50);
+      }
+    }
+  }
+
+  // Actions
+  .comment-actions {
+    grid-area: actions;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+
+    .action-btn {
+      background-color: var(--white);
+      border: none;
+      cursor: pointer;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+
+      &:active {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+////////////////////
+// replied container
+.replied-comment-container {
+  padding-left: 1rem;
+  border-left: 2px solid hsl(233, 17%, 90%);
+
+  @media screen and (min-width: $bp-medium) {
+    padding-left: 1.5rem;
+    margin-left: 1.5rem;
+  }
+}
+
+//////////////////
+// Input section
+.write-comment {
+  background-color: var(--white);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "input input"
+    "profile actions";
+
+  @media screen and (min-width: $bp-medium) {
+    grid-template-columns: max-content auto max-content;
+    grid-template-areas: "profile input actions";
+
+    .write-comment-avater {
+      margin-bottom: auto;
+    }
+
+    .write-comment-btn {
+      margin-bottom: auto;
+    }
+  }
+
+  .write-comment-avater {
+    grid-area: profile;
+    max-width: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .write-comment-field {
+    grid-area: input;
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    resize: none;
+    line-height: 1.2;
+    outline: none;
+    caret-color: var(--moderate-blue);
+    color: var(--dark-blue);
+
+    &:focus,
+    &:active {
+      border-color: var(--moderate-blue);
+    }
+  }
+}
+
+//global button in the writing interface
+.write-comment-btn {
+  grid-area: actions;
+  background-color: var(--moderate-blue);
+  border: none;
+  border-radius: 10px;
+  color: var(--white);
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  margin-left: auto;
+  cursor: pointer;
+
+  &:active {
+    opacity: 0.5;
+  }
+}
+
+/////////////////////
+/// Update interface
+.update-comment {
+  .comment {
+    grid-template-areas:
+      "user user"
+      "comment comment"
+      "update update"
+      "votting actions";
+
+    @media screen and (min-width: $bp-medium) {
+      grid-template-columns: max-content auto auto;
+
+      grid-template-areas:
+        "votting user actions"
+        "votting comment comment"
+        "update update update";
+
+      // voting section
+      .comment-votting {
+        flex-direction: column;
+        margin-bottom: auto;
+      }
+    }
+
+    // comment content
+    .comment-content {
+      grid-area: comment;
+      border: 1px solid var(--light-gray);
+      border-radius: 5px;
+      padding: 0.5rem 1rem;
+      resize: none;
+      line-height: 1.2;
+      outline: none;
+      caret-color: var(--moderate-blue);
+      color: var(--dark-blue);
+
+      &:focus,
+      &:active {
+        border-color: var(--moderate-blue);
+      }
+    }
+
+    .write-comment-btn {
+      grid-area: update;
+    }
+  }
+}
