@@ -1,0 +1,12 @@
+{
+  "persons": [
+    {
+      "id": 1,
+      "image": "./images/avatars/image-amyrobson.png"
+    },
+    {
+      "id": 1,
+      "image": "./images/avatars/image-ramsesmiron.png"
+    }
+  ]
+}

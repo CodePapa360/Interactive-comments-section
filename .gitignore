@@ -15,5 +15,7 @@
 .DS_Store
 ###############################################
 dist
-./css
+css
+src/css
 node_modules
+.parcel-cache
