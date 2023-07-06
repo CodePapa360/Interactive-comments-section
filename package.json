@@ -1,7 +1,7 @@
 {
   "name": "interactive-comments-section",
   "version": "1.0.0",
-  "description": "Interactive Comments Section",
+  "description": "Interactive comments section",
   "web": "./dist/index.html",
   "targets": {
     "web": {
@@ -10,10 +10,13 @@
     }
   },
   "scripts": {
-    "build": "sass ./src/sass/main.scss ./src/css/main.css",
-    "watch-sass": "sass --watch ./src/sass/main.scss ./src/css/main.css",
+    "build-sass": "sass ./src/sass/main.scss ./src/compiled/main.css",
+    "build-js": "babel src/js --out-dir ./src/compiled",
+    "build": "npm run build-sass && npm run build-js",
+    "watch-sass": "sass --watch ./src/sass/main.scss ./src/compiled/main.css",
+    "watch-js": "babel src/js --out-dir ./src/compiled --watch",
     "live-server": "live-server ./src",
-    "start": "npm-run-all -p watch-sass live-server"
+    "start": "npm-run-all -p watch-sass watch-js live-server"
   },
   "author": "Alamin",
   "license": "MIT",

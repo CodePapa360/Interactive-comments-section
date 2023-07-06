@@ -66,7 +66,6 @@ Users should be able to:
 - CSS Grid
 - JavaScript
 - NPM
-- [Webpack - a module bundler](https://webpack.js.org/)
 
 ## What I Learned
 

@@ -19,3 +19,4 @@ css
 src/css
 node_modules
 .parcel-cache
+src/compiled
