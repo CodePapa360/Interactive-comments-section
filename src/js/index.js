@@ -1,7 +1,5 @@
 "use strict";
 
-console.log("test build");
-
 const commentsContainerEl = document.querySelector(".all-comments-container");
 
 const dataJson = await fetch("./json/data.json")
