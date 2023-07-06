@@ -2,29 +2,30 @@
   "name": "interactive-comments-section",
   "version": "1.0.0",
   "description": "Interactive comments section",
-  "web": "./dist/index.html",
-  "targets": {
-    "web": {
-      "context": "browser",
-      "publicUrl": "./"
-    }
-  },
+  "main": "index.html",
   "scripts": {
-    "build-sass": "sass ./src/sass/main.scss ./src/compiled/main.css",
-    "build-js": "babel src/js --out-dir ./src/compiled",
-    "build": "npm run build-sass && npm run build-js",
-    "watch-sass": "sass --watch ./src/sass/main.scss ./src/compiled/main.css",
-    "watch-js": "babel src/js --out-dir ./src/compiled --watch",
+    "start": "npm run dev",
+    "dev": "npm-run-all -p watch-webpack live-server",
+    "watch-webpack": "webpack --mode development --watch",
     "live-server": "live-server ./src",
-    "start": "npm-run-all -p watch-sass watch-js live-server"
+    "build": "webpack --mode production"
   },
   "author": "Alamin",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.22.6",
-    "@babel/core": "^7.22.7",
-    "@babel/preset-env": "^7.22.7",
-    "npm-run-all": "^4.1.5",
-    "sass": "^1.60.0"
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^2.3.0",
+    "sass": "^1.43.4",
+    "sass-loader": "^12.3.0",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.2.1"
+  },
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }

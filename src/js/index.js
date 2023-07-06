@@ -1,8 +1,9 @@
 "use strict";
+import "../sass/main.scss";
 import { test } from "./view.js";
 
 console.log(test);
-
+console.log("bbbbbbbbbb");
 const commentsContainerEl = document.querySelector(".all-comments-container");
 
 const dataJson = await fetch("./json/data.json")
