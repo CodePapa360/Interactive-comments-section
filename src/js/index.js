@@ -1,4 +1,7 @@
 "use strict";
+import { test } from "./view.js";
+
+console.log(test);
 
 const commentsContainerEl = document.querySelector(".all-comments-container");
 
