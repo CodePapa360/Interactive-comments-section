@@ -19,10 +19,12 @@ const controlWriteMainComment = function () {
   }
 };
 
-// console.log(await model.loadComment());
+///////////////////
+const controlEditComment = function () {};
 
 const init = function () {
   writeMainCommentView.addHandlerMainComment(controlWriteMainComment);
+  mainCommentView.addHandlerEdit(controlEditComment);
 };
 
 init();

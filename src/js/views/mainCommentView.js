@@ -1,9 +1,21 @@
 import View from "./View.js";
 
 class MainComment extends View {
+  // _commentParentElement;
+
   renderComment(data) {
     const markup = this.createSelfCommentMarkup(data);
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
+    // this._commentParentElement = document.querySelector(".each-comment");
+  }
+
+  addHandlerEdit(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      const btn = e.target.closest(".edit-btn");
+      if (!btn) return;
+
+      handler();
+    });
   }
 
   createSelfCommentMarkup(data) {
@@ -39,12 +51,12 @@ class MainComment extends View {
         </div>
 
         <div class="comment-actions">
-          <button class="action-btn" type="button">
+          <button class="action-btn delete-btn" type="button">
             <img src="./images/icon-delete.svg" alt="Delete icon" />
             <span>Delete</span>
           </button>
 
-          <button class="action-btn" type="button">
+          <button class="action-btn edit-btn" type="button">
             <img src="./images/icon-edit.svg" alt="Edit icon" />
             <span>Edit</span>
           </button>
