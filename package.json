@@ -1,0 +1,14 @@
+{
+  "name": "interactive-comments-section",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">Interactive comments section</h1> <div align=\"center\">",
+  "main": "index.js",
+  "scripts": {
+    "build": "sass src/sass:src/css"
+  },
+  "author": "Alamin",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.63.6"
+  }
+}
