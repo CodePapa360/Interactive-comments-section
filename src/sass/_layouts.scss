@@ -44,7 +44,7 @@ main {
     "votting actions";
 
   @media screen and (min-width: $bp-medium) {
-    grid-template-columns: auto auto auto;
+    grid-template-columns: max-content auto auto;
 
     grid-template-areas:
       "votting user actions"
