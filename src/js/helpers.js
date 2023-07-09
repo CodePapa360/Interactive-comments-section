@@ -12,3 +12,9 @@ export const formatDate = function (date) {
     return new Intl.DateTimeFormat("Us").format(date);
   }
 };
+
+///////////////////
+export const getUniqueId = function () {
+  const timestamp = new Date().getTime();
+  return +timestamp.toString();
+};
