@@ -93,6 +93,7 @@ main {
   .comment-content {
     grid-area: comment;
     color: var(--grayish-blue);
+    word-wrap: break-word;
 
     .to-replied-username {
       color: var(--moderate-blue);
