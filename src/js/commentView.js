@@ -1,6 +1,63 @@
 class CommentView {
   _allCommentContainer = document.querySelector(".all-comments-container");
   _newCommentInputEl = document.querySelector(".new-comment");
+  _body = document.querySelector("body");
+
+  renderModal(id, handler) {
+    const markup = `
+      <div class="overlay"></div>
+      <div class="modal">
+        <h1>Delete comment</h1>
+        <p>
+          Are you sure you want to delete this comment? This will remove the comment
+          and can't be undone.
+        </p>
+        <div class="modal-btns-container">
+          <button class="modal-btn btn-no">No, cancel</button>
+          <button class="modal-btn btn-yes">Yes, delete</button>
+        </div>
+      </div>
+    `;
+
+    this._body.insertAdjacentHTML("afterbegin", markup);
+    this.attachModalEventListeners(id, handler);
+  }
+
+  attachModalEventListeners(id, handler) {
+    const overlay = document.querySelector(".overlay");
+    const modal = document.querySelector(".modal");
+    const btnNo = document.querySelector(".btn-no");
+    const btnYes = document.querySelector(".btn-yes");
+
+    const handleNoButtonClick = () => {
+      overlay.remove();
+      modal.remove();
+    };
+
+    const handleYesButtonClick = () => {
+      handler(id);
+      overlay.remove();
+      modal.remove();
+    };
+
+    btnNo.addEventListener("click", handleNoButtonClick);
+    btnYes.addEventListener("click", handleYesButtonClick);
+  }
+
+  addHandlerDeleteBtn(handler) {
+    this._allCommentContainer.addEventListener("click", function (e) {
+      const btn = e.target.closest(".delete-btn");
+      if (!btn) return;
+
+      const id = e.target.closest(".comment-wrapper").dataset.id;
+      handler(id);
+    });
+  }
+
+  deleteCommentFromDOM(id) {
+    const dom = this._allCommentContainer.querySelector(`.key${id}`);
+    if (dom) dom.closest(".each-comment").remove();
+  }
 
   ////////////////////
   //Updating funtionality
@@ -20,7 +77,7 @@ class CommentView {
   renderUpdatedComment(data) {
     const parentEl = document.querySelector(`.key${data.id}`);
 
-    const markup = this.generateSelfCommentMarkup(data);
+    const markup = this.selfCommentInnerMarkup(data);
     parentEl.innerHTML = markup;
   }
 
@@ -105,6 +162,14 @@ class CommentView {
     return `
     <div class="each-comment">
       <div data-id="${data.id}" class="key${data.id} comment-wrapper">
+        ${this.selfCommentInnerMarkup(data)}
+      </div>
+    </div>
+    `;
+  }
+
+  selfCommentInnerMarkup(data) {
+    return `
         <div class="main-comment comment">
           <div class="comment-user">
             <div class="avater">
@@ -117,37 +182,35 @@ class CommentView {
             <span class="you-txt">You</span>
             <p class="created-at">${data.createdAt}</p>
           </div>
-    
+
           <p class="comment-content">
           ${data.content}
           </p>
-    
+
           <div class="comment-votting">
             <button class="btn-plus btn-votting" type="button">
               <img src="./images/icon-plus.svg" alt="Plus icon" />
             </button>
-    
+
             <p class="score">${data.score}</p>
-    
+
             <button class="btn-minus btn-votting" type="button">
               <img src="./images/icon-minus.svg" alt="Minus icon" />
             </button>
           </div>
-    
+
           <div class="comment-actions">
             <button class="action-btn delete-btn" type="button">
               <img src="./images/icon-delete.svg" alt="Delete icon" />
               <span>Delete</span>
             </button>
-    
+
             <button class="action-btn edit-btn" type="button">
               <img src="./images/icon-edit.svg" alt="Edit icon" />
               <span>Edit</span>
             </button>
           </div>
         </div>
-      </div>
-    </div>
     `;
   }
 

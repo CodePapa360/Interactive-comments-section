@@ -20,63 +20,34 @@ const controlNewComment = function () {
 ///////////////////
 //Edit controlling
 const controlEditComment = function (id) {
-  const editInfo = model.getEditInfo(id);
+  const editInfo = model.getEditInfo(+id);
   commentView.renderEditingField(editInfo);
 };
 
 ///////////////////
 //Updating controlling
 const controlUpdateComment = function (id, updatedComment) {
-  const updatedData = model.getUpdatedComment(id, updatedComment);
+  const updatedData = model.getUpdatedComment(+id, updatedComment);
 
   commentView.renderUpdatedComment(updatedData);
+};
+
+// ////////////////
+// delete button
+const controlDeleteBtn = function (id) {
+  commentView.renderModal(id, deleteCommentHandler);
+};
+
+const deleteCommentHandler = function (id) {
+  model.deleteComment(+id);
+  commentView.deleteCommentFromDOM(id);
 };
 
 const init = function () {
   commentView.addHandlerNewComment(controlNewComment);
   commentView.addHandlerEdit(controlEditComment);
   commentView.addHandlerUpdate(controlUpdateComment);
+  commentView.addHandlerDeleteBtn(controlDeleteBtn);
 };
 
 init();
-
-///////////////////////////////
-// const controlWriteMainComment = function () {
-//   try {
-//     //Getting the new comment content
-//     const comment = writeMainCommentView.getComment();
-//     if (!comment) return;
-
-//     //Storing comment data
-//     model.storeComment(comment);
-
-//     //Rendering comment
-//     mainCommentView.renderComment(model.getCommentData());
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-// ///////////////////
-// const controlEditComment = function (id) {
-//   mainCommentView.renderEditComment(model.getEditInfo(id));
-// };
-// /////////////////
-// const controlUpdateComment = function (data) {
-//   model.storeComment(data);
-
-//   mainCommentView.renderComment(model.getCommentData());
-// };
-// ////////////////////
-// const contrlDelete = function () {
-//   mainCommentView.renderModal();
-// };
-
-// const init = function () {
-//   writeMainCommentView.addHandlerMainComment(controlWriteMainComment);
-//   mainCommentView.addHandlerEdit(controlEditComment);
-//   mainCommentView.addHandlerUpdate(controlUpdateComment);
-//   mainCommentView.addHandlerDelete(contrlDelete);
-// };
-
-// init();

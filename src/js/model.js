@@ -45,7 +45,7 @@ export const getNewCommentData = function () {
 };
 
 export const getEditInfo = function (id) {
-  const targetComment = allComments.find((com) => com.id === +id);
+  const targetComment = allComments.find((com) => com.id === id);
   const data = {
     ...targetComment,
     createdAt: formatDate(new Date(targetComment.createdAt)),
@@ -54,7 +54,7 @@ export const getEditInfo = function (id) {
 };
 
 export const getUpdatedComment = function (id, updatedComment) {
-  const targetComment = allComments.find((com) => com.id === +id);
+  const targetComment = allComments.find((com) => com.id === id);
   targetComment.content = updatedComment;
   const updated = {
     ...targetComment,
@@ -63,4 +63,11 @@ export const getUpdatedComment = function (id, updatedComment) {
   };
 
   return updated;
+};
+
+export const deleteComment = function (id) {
+  const index = allComments.findIndex((com) => com.id === id);
+  if (index !== -1) {
+    allComments.splice(index, 1);
+  }
 };

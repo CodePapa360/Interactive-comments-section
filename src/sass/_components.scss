@@ -4,12 +4,49 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--white);
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 10px;
+  width: calc(100% - 2rem);
+  max-width: 22rem;
+
   z-index: 100;
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--dark-blue);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: var(--grayish-blue);
+    margin-bottom: 1rem;
+  }
+
+  .modal-btns-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  button {
+    width: 100%;
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    cursor: pointer;
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
+
+  .btn-no {
+    background-color: var(--grayish-blue);
+  }
+
+  .btn-yes {
+    background-color: var(--soft-red);
   }
 }
 
