@@ -1,7 +1,21 @@
-class CommentView {
-  _allCommentContainer = document.querySelector(".all-comments-container");
-  _newCommentInputEl = document.querySelector(".new-comment");
-  _body = document.querySelector("body");
+import MainView from "./mainView.js";
+
+class CommentView extends MainView {
+  ////////////////////
+  //Votting funtionality
+
+  addHandlerVotting(handler) {
+    this._allCommentContainer.addEventListener("click", function (e) {
+      const btn = e.target.closest(".btn-votting");
+      if (!btn) return;
+
+      const parentEl = e.target.closest(".comment-wrapper");
+      const vote = btn.dataset.vote;
+      const id = parentEl.dataset.id;
+
+      handler(id, vote);
+    });
+  }
 
   ////////////////////
   //Updating funtionality
@@ -62,13 +76,13 @@ class CommentView {
           </p>
 
           <div class="comment-votting">
-            <button class="btn-plus btn-votting" type="button">
+            <button data-vote="up" class="btn-plus btn-votting" type="button">
               <img src="./images/icon-plus.svg" alt="Plus icon" />
             </button>
 
             <p class="score">${data.score}</p>
 
-            <button class="btn-minus btn-votting" type="button">
+            <button data-vote="down" class="btn-minus btn-votting" type="button">
               <img src="./images/icon-minus.svg" alt="Minus icon" />
             </button>
           </div>

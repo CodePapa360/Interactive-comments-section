@@ -46,11 +46,18 @@ const deleteCommentHandler = function (id) {
   ModalView.deleteCommentFromDOM(id);
 };
 
+/////////////////
+//Votting
+const controlVotting = function (id, vote) {
+  model.vote(+id, vote);
+};
+
 const init = function () {
   writeNewCommentView.addHandlerNewComment(controlNewComment);
   editView.addHandlerEdit(controlEditComment);
   commentView.addHandlerUpdate(controlUpdateComment);
   ModalView.addHandlerDeleteBtn(controlDeleteBtn);
+  commentView.addHandlerVotting(controlVotting);
 };
 
 init();
