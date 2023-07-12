@@ -8,7 +8,7 @@ body {
 
   font-family: "Rubik", sans-serif;
   background-color: var(--light-gray);
-  padding: 1.5rem 1rem 0;
+  padding: 1.5rem 1rem 1rem;
 }
 
 main {
@@ -22,12 +22,14 @@ main {
 .footer {
   width: 100%;
   margin-top: auto;
-  padding: 1rem;
 }
 
 .container {
   max-width: 700px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .comment {
@@ -172,7 +174,7 @@ main {
 // Input section
 .write-comment {
   background-color: var(--white);
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
   padding: 1rem;
   border-radius: 5px;
 
@@ -214,6 +216,7 @@ main {
     outline: none;
     caret-color: var(--moderate-blue);
     color: var(--dark-blue);
+    width: 100%;
 
     &:focus,
     &:active {

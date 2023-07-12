@@ -1,17 +1,20 @@
 "use strict";
-import commentView from "./commentView.js";
+import commentView from "./views/commentView.js";
 import * as model from "./model.js";
+import writeNewCommentView from "./views/writeNewCommentView.js";
+import editView from "./views/editView.js";
+import ModalView from "./views/ModalView.js";
 
 const controlNewComment = function () {
   try {
     //Getting the new comment content
-    const comment = commentView.getNewComment();
+    const comment = writeNewCommentView.getNewComment();
     if (!comment) return;
 
     //Storing comment data
     model.storeComment(comment);
 
-    commentView.renderNewComment(model.getNewCommentData());
+    commentView.renderNewSelfComment(model.getNewCommentData());
   } catch (err) {
     console.log(err);
   }
@@ -21,7 +24,7 @@ const controlNewComment = function () {
 //Edit controlling
 const controlEditComment = function (id) {
   const editInfo = model.getEditInfo(+id);
-  commentView.renderEditingField(editInfo);
+  editView.renderEditingField(editInfo);
 };
 
 ///////////////////
@@ -35,19 +38,24 @@ const controlUpdateComment = function (id, updatedComment) {
 // ////////////////
 // delete button
 const controlDeleteBtn = function (id) {
-  commentView.renderModal(id, deleteCommentHandler);
+  ModalView.renderModal(id, deleteCommentHandler);
 };
 
 const deleteCommentHandler = function (id) {
   model.deleteComment(+id);
-  commentView.deleteCommentFromDOM(id);
+  ModalView.deleteCommentFromDOM(id);
 };
 
 const init = function () {
-  commentView.addHandlerNewComment(controlNewComment);
-  commentView.addHandlerEdit(controlEditComment);
+  writeNewCommentView.addHandlerNewComment(controlNewComment);
+  editView.addHandlerEdit(controlEditComment);
   commentView.addHandlerUpdate(controlUpdateComment);
-  commentView.addHandlerDeleteBtn(controlDeleteBtn);
+  ModalView.addHandlerDeleteBtn(controlDeleteBtn);
 };
 
 init();
+
+//Some styling
+const contai = document.querySelector(".container");
+const footer = document.querySelector("footer").scrollHeight;
+contai.style.minHeight = `calc(100vh - 2.5rem - ${footer}px)`;
