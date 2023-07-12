@@ -20,12 +20,14 @@ class ModalView extends MainView {
     const handleNoButtonClick = () => {
       overlay.remove();
       modal.remove();
+      this._body.style.overflow = null;
     };
 
     const handleYesButtonClick = () => {
       handler(id);
       overlay.remove();
       modal.remove();
+      this._body.style.overflow = null;
     };
 
     btnNo.addEventListener("click", handleNoButtonClick);
@@ -55,6 +57,7 @@ class ModalView extends MainView {
 
     this._body.insertAdjacentHTML("afterbegin", markup);
     this.attachModalEventListeners(id, handler);
+    this._body.style.overflow = "hidden";
   }
 }
 
