@@ -4,19 +4,6 @@ class CommentView extends MainView {
   ////////////////////
   //Votting funtionality
 
-  addHandlerVotting(handler) {
-    this._allCommentContainer.addEventListener("click", function (e) {
-      const btn = e.target.closest(".btn-votting");
-      if (!btn) return;
-
-      const parentEl = e.target.closest(".comment-wrapper");
-      const vote = btn.dataset.vote;
-      const id = parentEl.dataset.id;
-
-      handler(id, vote);
-    });
-  }
-
   ////////////////////
   //Updating funtionality
   addHandlerUpdate(handler) {
@@ -33,7 +20,7 @@ class CommentView extends MainView {
   }
 
   renderUpdatedComment(data) {
-    const parentEl = document.querySelector(`.key${data.id}`);
+    const parentEl = this._allCommentContainer.querySelector(`.key${data.id}`);
 
     const markup = this.selfCommentInnerMarkup(data);
     parentEl.innerHTML = markup;
@@ -81,7 +68,7 @@ class CommentView extends MainView {
             </button>
 
             <p class="score">${data.score}</p>
-
+ 
             <button data-vote="down" class="btn-minus btn-votting" type="button">
               <img src="./images/icon-minus.svg" alt="Minus icon" />
             </button>
@@ -100,6 +87,12 @@ class CommentView extends MainView {
           </div>
         </div>
     `;
+  }
+
+  renderScore(id, score) {
+    const parentEl = this._allCommentContainer.querySelector(`.key${id}`);
+    const scoreEl = parentEl.querySelector(".score");
+    scoreEl.textContent = score;
   }
 }
 

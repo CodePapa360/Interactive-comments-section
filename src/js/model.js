@@ -15,7 +15,7 @@ allData.currentUser = {
 };
 
 let currentState;
-console.log(allData.currentUser);
+
 export const storeComment = async function (comment) {
   try {
     const mainCommentObject = {
@@ -80,8 +80,38 @@ export const deleteComment = function (id) {
 };
 
 export const vote = function (id, vote) {
-  allData.currentUser.votted[id] = vote;
-  const hasVot = allData.currentUser.votted[id];
-  console.log(id, vote);
-  console.log(hasVot);
+  const hasVot = allData.currentUser.votted.hasOwnProperty(id);
+  const targetComment = allData.comments.find((com) => com.id === id);
+
+  if (!hasVot) {
+    allData.currentUser.votted[id] = vote;
+
+    if (vote === "up") {
+      targetComment.score += 1;
+      return targetComment.score;
+    }
+
+    if (vote === "down") {
+      targetComment.score -= 1;
+      return targetComment.score;
+    }
+  }
+
+  const prevVote = allData.currentUser.votted[id];
+
+  if (prevVote === vote) {
+    return targetComment.score;
+  }
+
+  if (vote === "up") {
+    allData.currentUser.votted[id] = vote;
+    targetComment.score += 2;
+    return targetComment.score;
+  }
+
+  if (vote === "down") {
+    allData.currentUser.votted[id] = vote;
+    targetComment.score -= 2;
+    return targetComment.score;
+  }
 };

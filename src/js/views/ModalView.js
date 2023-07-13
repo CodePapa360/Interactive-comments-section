@@ -31,6 +31,7 @@ class ModalView extends MainView {
     };
 
     btnNo.addEventListener("click", handleNoButtonClick);
+    overlay.addEventListener("click", handleNoButtonClick);
     btnYes.addEventListener("click", handleYesButtonClick);
   }
 

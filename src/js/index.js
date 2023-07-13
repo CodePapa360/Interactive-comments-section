@@ -49,7 +49,8 @@ const deleteCommentHandler = function (id) {
 /////////////////
 //Votting
 const controlVotting = function (id, vote) {
-  model.vote(+id, vote);
+  const score = model.vote(+id, vote);
+  commentView.renderScore(id, score);
 };
 
 const init = function () {
