@@ -1,6 +1,6 @@
 {
   "currentUser": {
-    "image": { 
+    "image": {
       "png": "./images/avatars/image-juliusomo.png",
       "webp": "./images/avatars/image-juliusomo.webp"
     },
@@ -13,11 +13,25 @@
       "createdAt": "1 month ago",
       "score": 12,
       "user": {
-        "image": { 
+        "image": {
           "png": "./images/avatars/image-amyrobson.png",
           "webp": "./images/avatars/image-amyrobson.webp"
         },
         "username": "amyrobson"
+      },
+      "replies": []
+    },
+    {
+      "id": 1354345,
+      "content": "Hellow words",
+      "createdAt": "3 month ago",
+      "score": 12,
+      "user": {
+        "image": {
+          "png": "./images/avatars/image-juliusomo.png",
+          "webp": "./images/avatars/image-juliusomo.webp"
+        },
+        "username": "juliusomo"
       },
       "replies": []
     },
@@ -27,7 +41,7 @@
       "createdAt": "2 weeks ago",
       "score": 5,
       "user": {
-        "image": { 
+        "image": {
           "png": "./images/avatars/image-maxblagun.png",
           "webp": "./images/avatars/image-maxblagun.webp"
         },
@@ -41,7 +55,7 @@
           "score": 4,
           "replyingTo": "maxblagun",
           "user": {
-            "image": { 
+            "image": {
               "png": "./images/avatars/image-ramsesmiron.png",
               "webp": "./images/avatars/image-ramsesmiron.webp"
             },
@@ -55,11 +69,25 @@
           "score": 2,
           "replyingTo": "ramsesmiron",
           "user": {
-            "image": { 
+            "image": {
               "png": "./images/avatars/image-juliusomo.png",
               "webp": "./images/avatars/image-juliusomo.webp"
             },
             "username": "juliusomo"
+          }
+        },
+        {
+          "id": 300,
+          "content": "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
+          "createdAt": "1 week ago",
+          "score": 4,
+          "replyingTo": "maxblagun",
+          "user": {
+            "image": {
+              "png": "./images/avatars/image-ramsesmiron.png",
+              "webp": "./images/avatars/image-ramsesmiron.webp"
+            },
+            "username": "ramsesmiron"
           }
         }
       ]

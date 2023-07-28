@@ -1,6 +1,12 @@
 ////////////////////////////
 // Timing function
-export const formatDate = function (date) {
+export const formatDate = function (inputDate) {
+  // console.log("From helper", inputDate);
+  const relativeTimeRegex = /^\d+\s+\w+\s+ago$/i;
+  if (relativeTimeRegex.test(inputDate)) return inputDate;
+
+  const date = new Date(inputDate);
+
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs((date1 - date2) / (1000 * 60 * 60 * 24)));
 

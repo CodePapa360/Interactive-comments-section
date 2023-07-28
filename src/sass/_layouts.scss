@@ -184,6 +184,7 @@ main {
   grid-template-areas:
     "input input"
     "profile actions";
+  margin-bottom: 1rem;
 
   @media screen and (min-width: $bp-medium) {
     grid-template-columns: max-content auto max-content;

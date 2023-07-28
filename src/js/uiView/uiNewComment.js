@@ -1,6 +1,4 @@
-import MainView from "./mainView.js";
-
-class WriteNewComment extends MainView {
+class uiNewComment {
   _newCommentInputEl = document.querySelector(".new-comment");
 
   getNewComment() {
@@ -28,4 +26,4 @@ class WriteNewComment extends MainView {
   }
 }
 
-export default new WriteNewComment();
+export default new uiNewComment();

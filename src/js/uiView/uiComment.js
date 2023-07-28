@@ -1,51 +1,39 @@
-import MainView from "./mainView.js";
+class UiComment {
+  _allCommentContainer = document.querySelector(".all-comments-container");
 
-class CommentView extends MainView {
-  ////////////////////
-  //Votting funtionality
+  //1. Render main comment.
+  renderMainComment(data) {
+    const markup = `
+    <div class="each-comment">
+      <div data-id="${data.id}" class="key${data.id} comment-wrapper">
+        ${this.commentMarkup(data)}
+      </div>
+      <div class="replied-comment-container"></div>
+    </div>
+    `;
 
-  ////////////////////
-  //Updating funtionality
-  addHandlerUpdate(handler) {
-    this._allCommentContainer.addEventListener("click", function (e) {
-      const btn = e.target.closest(".update-btn");
-      if (!btn) return;
-
-      const parentEl = e.target.closest(".comment-wrapper");
-
-      const id = parentEl.dataset.id;
-      const updatedComment = parentEl.querySelector(".comment-content").value;
-      handler(id, updatedComment);
-    });
-  }
-
-  renderUpdatedComment(data) {
-    const parentEl = this._allCommentContainer.querySelector(`.key${data.id}`);
-
-    const markup = this.selfCommentInnerMarkup(data);
-    parentEl.innerHTML = markup;
-  }
-
-  /////////////////////
-  // Render new commnet
-  renderNewSelfComment(data) {
-    const markup = this.generateSelfCommentMarkup(data);
     this._allCommentContainer.insertAdjacentHTML("beforeend", markup);
   }
 
-  generateSelfCommentMarkup(data) {
-    return `
-    <div class="each-comment">
-      <div data-id="${data.id}" class="key${data.id} comment-wrapper">
-        ${this.selfCommentInnerMarkup(data)}
-      </div>
-    </div>
-    `;
-  }
+  //2. Render replied comment.
+  renderRepliedComment(data) {
+    const wrapper = document.querySelector(`.key${data.parentId}`);
+    const container = wrapper.nextElementSibling;
 
-  selfCommentInnerMarkup(data) {
+    const markup = `
+    <div data-id="${data.id}" class="key${data.id} comment-wrapper">
+      ${this.commentMarkup(data)}
+    </div>
+  `;
+
+    container.insertAdjacentHTML("beforeend", markup);
+  }
+  ////////////////////////////////
+  ////////////////////////////////
+
+  commentMarkup(data) {
     return `
-        <div class="main-comment comment">
+        <div class="comment">
           <div class="comment-user">
             <div class="avater">
               <img
@@ -54,11 +42,16 @@ class CommentView extends MainView {
               />
             </div>
             <p class="username">${data.user.username}</p>
-            <span class="you-txt">You</span>
+            ${data.self ? '<span class="you-txt">You</span>' : ""}
             <p class="created-at">${data.createdAt}</p>
           </div>
 
           <p class="comment-content">
+          ${
+            data.replyingTo
+              ? `<span class="to-replied-username">@${data.replyingTo}</span>`
+              : ""
+          }
           ${data.content}
           </p>
 
@@ -75,6 +68,9 @@ class CommentView extends MainView {
           </div>
 
           <div class="comment-actions">
+            ${
+              data.self
+                ? `
             <button class="action-btn delete-btn" type="button">
               <img src="./images/icon-delete.svg" alt="Delete icon" />
               <span>Delete</span>
@@ -84,16 +80,18 @@ class CommentView extends MainView {
               <img src="./images/icon-edit.svg" alt="Edit icon" />
               <span>Edit</span>
             </button>
+            `
+                : `
+            <button class="action-btn reply-btn" type="button">
+            <img src="./images/icon-reply.svg" alt="Reply icon" />
+            <span>Reply</span>
+            </button>
+            `
+            }
           </div>
         </div>
     `;
   }
-
-  renderScore(id, score) {
-    const parentEl = this._allCommentContainer.querySelector(`.key${id}`);
-    const scoreEl = parentEl.querySelector(".score");
-    scoreEl.textContent = score;
-  }
 }
 
-export default new CommentView();
+export default new UiComment();
