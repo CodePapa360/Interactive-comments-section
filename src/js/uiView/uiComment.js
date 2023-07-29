@@ -50,7 +50,7 @@ class UiComment {
               />
             </div>
             <p class="username">${data.user.username}</p>
-            ${data.self ? '<span class="you-txt">You</span>' : ""}
+            ${data.me ? '<span class="you-txt">You</span>' : ""}
             <p class="created-at">${data.createdAt}</p>
           </div>
 
@@ -77,7 +77,7 @@ class UiComment {
 
           <div class="comment-actions">
             ${
-              data.self
+              data.me
                 ? `
             <button class="action-btn delete-btn" type="button">
               <img src="./images/icon-delete.svg" alt="Delete icon" />

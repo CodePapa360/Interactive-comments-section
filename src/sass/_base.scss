@@ -12,6 +12,18 @@
 }
 
 $bp-medium: 700px;
+$bp-small: 300px;
+$bp-very-small: 250px;
+
+html {
+  @media screen and (max-width: $bp-small) {
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: $bp-very-small) {
+    font-size: 11px;
+  }
+}
 
 ::selection {
   background-color: var(--moderate-blue);

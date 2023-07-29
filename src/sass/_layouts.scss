@@ -194,9 +194,24 @@ main {
       margin-bottom: auto;
     }
 
+    .action-buttons {
+      flex-direction: column;
+
+      button {
+        width: 100%;
+      }
+    }
+
     .write-comment-btn {
       margin-bottom: auto;
     }
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+    width: fit-content;
+    margin-left: auto;
   }
 
   .write-comment-avater {
@@ -227,7 +242,8 @@ main {
 }
 
 //global button in the writing interface
-.write-comment-btn {
+.write-comment-btn,
+.cancel-reply {
   grid-area: actions;
   background-color: var(--moderate-blue);
   border: none;
@@ -243,8 +259,13 @@ main {
   }
 }
 
+.cancel-reply {
+  background-color: var(--soft-red);
+}
+
 /////////////////////
 /// Update interface
+
 .update-comment.comment {
   grid-template-areas:
     "user user"

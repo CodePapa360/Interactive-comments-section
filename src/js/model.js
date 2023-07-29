@@ -21,13 +21,6 @@ export const load = async function () {
 };
 //////////////////////////////
 //////////////////////////////
-export const deleteComment = function (id) {
-  const index = allData.comments.findIndex((com) => com.id === id);
-  if (index !== -1) {
-    return allData.comments.splice(index, 1);
-  }
-};
-
 export const vote = function (id, vote) {
   const hasVot = allData.currentUser.votted.hasOwnProperty(id);
   const targetComment = allData.comments.find((com) => com.id === id);
@@ -72,7 +65,7 @@ export const processMainComment = function (data) {
   return {
     ...data,
     createdAt: formatDate(data.createdAt),
-    self: data.user.username === allData.currentUser.username ? true : false,
+    me: data.user.username === allData.currentUser.username ? true : false,
   };
 };
 
@@ -80,7 +73,7 @@ export const processRepliedComment = function (data, parentId) {
   return {
     ...data,
     createdAt: formatDate(data.createdAt),
-    self: data.user.username === allData.currentUser.username ? true : false,
+    me: data.user.username === allData.currentUser.username ? true : false,
     parentId: parentId,
   };
 };
@@ -119,7 +112,7 @@ export const storeComment = async function (repliedToId, comment, parentId) {
 
     const targetParent = allData.comments.find((cmt) => cmt.id === parentId);
     const targetUser = targetParent.replies.find(
-      (chCmt) => chCmt.id === repliedToId
+      (cmt) => cmt.id === repliedToId
     ).user.username;
 
     commentObject.replyingTo = targetUser;
@@ -149,9 +142,7 @@ export const getEditCommentData = function (parentId, mainId) {
 
   //
   const targetParent = allData.comments.find((cmt) => cmt.id === parentId);
-  const targetComment = targetParent.replies.find(
-    (chCmt) => chCmt.id === mainId
-  );
+  const targetComment = targetParent.replies.find((cmt) => cmt.id === mainId);
 
   return {
     ...targetComment,
@@ -168,20 +159,33 @@ export const getUpdatedCommentData = function (parentId, mainId, comment) {
     return {
       ...targetComment,
       createdAt: formatDate(targetComment.createdAt),
-      self: true,
+      me: true,
     };
   }
 
   const targetParent = allData.comments.find((cmt) => cmt.id === parentId);
-  const targetComment = targetParent.replies.find(
-    (chCmt) => chCmt.id === mainId
-  );
+  const targetComment = targetParent.replies.find((cmt) => cmt.id === mainId);
 
   targetComment.content = comment;
 
   return {
     ...targetComment,
     createdAt: formatDate(targetComment.createdAt),
-    self: true,
+    me: true,
   };
+};
+
+//Delete comment
+export const deleteComment = function (parentId, mainId) {
+  if (!parentId) {
+    const index = allData.comments.findIndex((com) => com.id === mainId);
+    allData.comments.splice(index, 1);
+    return;
+  }
+
+  const targetParent = allData.comments.find((cmt) => cmt.id === parentId);
+  const index = targetParent.replies.findIndex((cmt) => cmt.id === mainId);
+
+  targetParent.replies.splice(index, 1);
+  return;
 };

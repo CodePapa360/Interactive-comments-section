@@ -1,6 +1,7 @@
 "use strict";
 import * as model from "./model.js";
 import uiComment from "./uiView/uiComment.js";
+import uiDeleteModal from "./uiView/uiDeleteModal.js";
 import uiEdit from "./uiView/uiEdit.js";
 import uiNewComment from "./uiView/uiNewComment.js";
 import uiReply from "./uiView/uiReply.js";
@@ -58,27 +59,19 @@ const controlEditComment = function (parentId, mainId, comment) {
   uiComment.renderUpdatedComment(updatedComment);
 };
 
+// Delete comment
+const controlDeleteComment = function (parentId, mainId) {
+  uiDeleteModal.renderModal(parentId, mainId, deleteCommentHandler);
+};
+
+const deleteCommentHandler = function (parentId, mainId) {
+  model.deleteComment(+parentId, +mainId);
+  uiDeleteModal.deleteCommentFromDOM(parentId, mainId);
+};
+
 ///////////////////////////////////////
 //////////////////////////////////////
 //////////////////////////////////////
-
-// // ////////////////
-// // delete button
-// const controlDeleteBtn = function (id) {
-//   ModalView.renderModal(id, deleteCommentHandler);
-// };
-
-// const deleteCommentHandler = function (id) {
-//   model.deleteComment(+id);
-//   ModalView.deleteCommentFromDOM(id);
-// };
-
-// /////////////////
-// //Votting
-// const controlVotting = function (id, vote) {
-//   const score = model.vote(+id, vote);
-//   // commentView.renderScore(id, score);
-// };
 
 // ///////////////////////
 // //Reply button control
@@ -98,7 +91,7 @@ const init = function () {
   uiNewComment.addHandlerNewComment(controlNewComment);
   uiEdit.addHandlerEditBtn(controlEditComment);
   uiEdit.addHandlerUpdateBtn(controlEditComment);
-  // ModalView.addHandlerDeleteBtn(controlDeleteBtn);
+  uiDeleteModal.addHandlerDeleteBtn(controlDeleteComment);
   // commentView.addHandlerVotting(controlVotting);
   uiReply.addHandlerReplyBtn(controlReplyComment);
   uiReply.addHandlerSubmitReply(controlReplyComment);
@@ -111,7 +104,7 @@ init();
 ////////////////////////////////////////
 
 const loadMainComment = function (data) {
-  // 1. store data to model and the returned object should have a property wheather it is self or not
+  // 1. store data to model and the returned object should have a property wheather it is me or not
   const returnedData = model.processMainComment(data);
 
   // 2. render data to the ui and that function should render  based on slef or else comment
@@ -119,7 +112,7 @@ const loadMainComment = function (data) {
 };
 
 const loadRepliedComment = function (data, parentId) {
-  // 1. store data to the model and it will store the comment based on the parentComment (id args) and return wheather it is self or not property and also a property tells if it's the first reply or not.
+  // 1. store data to the model and it will store the comment based on the parentComment (id args) and return wheather it is me or not property and also a property tells if it's the first reply or not.
   const returnedData = model.processRepliedComment(data, parentId);
 
   // 2. render data to the ui and that function should render based on slef or else comment and create container based on the "needContainer" property.

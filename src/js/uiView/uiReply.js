@@ -17,12 +17,19 @@ class uiReply {
     const wrapper = document.querySelector(`.key${id}`);
     const markup = await this.generateReplyFieldMarkup(data);
     wrapper.insertAdjacentHTML("beforeend", markup);
+
+    const cancelBtn = wrapper.querySelector(".cancel-reply");
+    cancelBtn.addEventListener("click", function () {
+      const btnReply = wrapper.querySelector(".reply-btn");
+      btnReply.removeAttribute("disabled");
+      wrapper.querySelector(".reply-comment").remove();
+    });
   }
 
   async generateReplyFieldMarkup(data) {
     return `
         <div class="write-comment reply-comment">
-            <div class="write-comment-avater">
+          <div class="write-comment-avater">
                 <img
                     src="${data.image.png}"
                     alt="${data.username}'s photo"
@@ -35,8 +42,11 @@ class uiReply {
                 placeholder="Add a comment..."
                 ></textarea>
 
-                <button class="write-comment-btn submit-reply" type="button">Reply</button>
-            </div>
+                <div class="action-buttons">
+                  <button class="write-comment-btn submit-reply" type="button">Reply</button>
+                  <button class="cancel-reply" type="button">Cancel</button>
+                </div>
+          </div>
         </div>
         `;
   }
@@ -61,7 +71,7 @@ class uiReply {
 
       const btnReply = parentEl.querySelector(".reply-btn");
       btnReply.removeAttribute("disabled");
-      btn.parentElement.remove();
+      parentEl.querySelector(".reply-comment").remove();
 
       handler(repliedToId, comment, parentId);
     });
