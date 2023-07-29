@@ -1,14 +1,9 @@
 "use strict";
 import * as model from "./model.js";
 import uiComment from "./uiView/uiComment.js";
+import uiEdit from "./uiView/uiEdit.js";
 import uiNewComment from "./uiView/uiNewComment.js";
 import uiReply from "./uiView/uiReply.js";
-// import commentView from "./views/commentView.js";
-// import writeNewCommentView from "./views/writeNewCommentView.js";
-// import editFieldView from "./views/editFieldView.js";
-// import ModalView from "./views/ModalView.js";
-// import replyFieldView from "./views/replyView.js";
-// import replyView from "./views/replyView.js";
 
 const controlNewComment = async function () {
   try {
@@ -45,24 +40,27 @@ const controlReplyComment = async function (repliedToId, comment, parentId) {
   uiComment.renderRepliedComment(storedReply);
 };
 
+// editing
+const controlEditComment = function (parentId, mainId, comment) {
+  if (!comment) {
+    const editCommentData = model.getEditCommentData(+parentId, +mainId);
+
+    uiEdit.renderEditingField(editCommentData);
+    return;
+  }
+
+  const updatedComment = model.getUpdatedCommentData(
+    +parentId,
+    +mainId,
+    comment
+  );
+
+  uiComment.renderUpdatedComment(updatedComment);
+};
+
 ///////////////////////////////////////
 //////////////////////////////////////
 //////////////////////////////////////
-
-// ///////////////////
-// //Edit controlling
-// const controlEditComment = function (id) {
-//   const editInfo = model.getEditInfo(+id);
-//   editFieldView.renderEditingField(editInfo);
-// };
-
-// ///////////////////
-// //Updating controlling
-// const controlUpdateComment = function (id, updatedComment) {
-//   const updatedData = model.getUpdatedComment(+id, updatedComment);
-
-//   commentView.renderUpdatedComment(updatedData);
-// };
 
 // // ////////////////
 // // delete button
@@ -98,8 +96,8 @@ const controlReplyComment = async function (repliedToId, comment, parentId) {
 
 const init = function () {
   uiNewComment.addHandlerNewComment(controlNewComment);
-  // editFieldView.addHandlerEdit(controlEditComment);
-  // commentView.addHandlerUpdate(controlUpdateComment);
+  uiEdit.addHandlerEditBtn(controlEditComment);
+  uiEdit.addHandlerUpdateBtn(controlEditComment);
   // ModalView.addHandlerDeleteBtn(controlDeleteBtn);
   // commentView.addHandlerVotting(controlVotting);
   uiReply.addHandlerReplyBtn(controlReplyComment);

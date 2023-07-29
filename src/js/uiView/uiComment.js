@@ -28,6 +28,14 @@ class UiComment {
 
     container.insertAdjacentHTML("beforeend", markup);
   }
+
+  // 3. Render updated comment after editing
+  renderUpdatedComment(data) {
+    const parentEl = this._allCommentContainer.querySelector(`.key${data.id}`);
+
+    parentEl.innerHTML = this.commentMarkup(data);
+  }
+
   ////////////////////////////////
   ////////////////////////////////
 

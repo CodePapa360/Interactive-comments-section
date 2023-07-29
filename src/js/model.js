@@ -21,28 +21,6 @@ export const load = async function () {
 };
 //////////////////////////////
 //////////////////////////////
-
-export const getEditInfo = function (id) {
-  const targetComment = allData.comments.find((com) => com.id === id);
-  const data = {
-    ...targetComment,
-    createdAt: formatDate(targetComment.createdAt),
-  };
-  return data;
-};
-
-export const getUpdatedComment = function (id, updatedComment) {
-  const targetComment = allData.comments.find((com) => com.id === id);
-  targetComment.content = updatedComment;
-  const updated = {
-    ...targetComment,
-    content: updatedComment,
-    createdAt: formatDate(targetComment.createdAt),
-  };
-
-  return updated;
-};
-
 export const deleteComment = function (id) {
   const index = allData.comments.findIndex((com) => com.id === id);
   if (index !== -1) {
@@ -126,7 +104,6 @@ export const storeComment = async function (repliedToId, comment, parentId) {
 
     if (!repliedToId && !parentId) {
       allData.comments.push(commentObject);
-      console.log("new");
       return processMainComment(commentObject);
     }
 
@@ -137,7 +114,6 @@ export const storeComment = async function (repliedToId, comment, parentId) {
 
       commentObject.replyingTo = targetComment.user.username;
       targetComment.replies.push(commentObject);
-      console.log("direct reply");
       return processRepliedComment(commentObject, repliedToId);
     }
 
@@ -148,7 +124,6 @@ export const storeComment = async function (repliedToId, comment, parentId) {
 
     commentObject.replyingTo = targetUser;
     targetParent.replies.push(commentObject);
-    console.log("replied reply");
     return processRepliedComment(commentObject, parentId);
   } catch (err) {
     console.error(`${err} 💥💥💥`);
@@ -159,4 +134,54 @@ export const storeComment = async function (repliedToId, comment, parentId) {
 //Reply funtionality
 export const getReplyUserInfo = function () {
   return allData.currentUser;
+};
+
+// Edit funtionality
+export const getEditCommentData = function (parentId, mainId) {
+  if (!parentId) {
+    const targetComment = allData.comments.find((cmt) => cmt.id === mainId);
+
+    return {
+      ...targetComment,
+      createdAt: formatDate(targetComment.createdAt),
+    };
+  }
+
+  //
+  const targetParent = allData.comments.find((cmt) => cmt.id === parentId);
+  const targetComment = targetParent.replies.find(
+    (chCmt) => chCmt.id === mainId
+  );
+
+  return {
+    ...targetComment,
+    createdAt: formatDate(targetComment.createdAt),
+  };
+};
+
+//Updating comment
+export const getUpdatedCommentData = function (parentId, mainId, comment) {
+  if (!parentId) {
+    const targetComment = allData.comments.find((com) => com.id === mainId);
+    targetComment.content = comment;
+
+    return {
+      ...targetComment,
+      createdAt: formatDate(targetComment.createdAt),
+      self: true,
+    };
+  }
+
+  const targetParent = allData.comments.find((cmt) => cmt.id === parentId);
+  const targetComment = targetParent.replies.find(
+    (chCmt) => chCmt.id === mainId
+  );
+
+  targetComment.content = comment;
+
+  return {
+    ...targetComment,
+    createdAt: formatDate(targetComment.createdAt),
+    self: true,
+  };
 };

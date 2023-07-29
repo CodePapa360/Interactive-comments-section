@@ -245,49 +245,47 @@ main {
 
 /////////////////////
 /// Update interface
-.update-comment {
-  .comment {
+.update-comment.comment {
+  grid-template-areas:
+    "user user"
+    "comment comment"
+    "update update"
+    "votting actions";
+
+  @media screen and (min-width: $bp-medium) {
+    grid-template-columns: max-content auto auto;
+
     grid-template-areas:
-      "user user"
-      "comment comment"
-      "update update"
-      "votting actions";
+      "votting user actions"
+      "votting comment comment"
+      "update update update";
 
-    @media screen and (min-width: $bp-medium) {
-      grid-template-columns: max-content auto auto;
-
-      grid-template-areas:
-        "votting user actions"
-        "votting comment comment"
-        "update update update";
-
-      // voting section
-      .comment-votting {
-        flex-direction: column;
-        margin-bottom: auto;
-      }
+    // voting section
+    .comment-votting {
+      flex-direction: column;
+      margin-bottom: auto;
     }
+  }
 
-    // comment content
-    .comment-content {
-      grid-area: comment;
-      border: 1px solid var(--light-gray);
-      border-radius: 5px;
-      padding: 0.5rem 1rem;
-      resize: none;
-      line-height: 1.2;
-      outline: none;
-      caret-color: var(--moderate-blue);
-      color: var(--dark-blue);
+  // comment content
+  .comment-content {
+    grid-area: comment;
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    resize: none;
+    line-height: 1.2;
+    outline: none;
+    caret-color: var(--moderate-blue);
+    color: var(--dark-blue);
 
-      &:focus,
-      &:active {
-        border-color: var(--moderate-blue);
-      }
+    &:focus,
+    &:active {
+      border-color: var(--moderate-blue);
     }
+  }
 
-    .write-comment-btn {
-      grid-area: update;
-    }
+  .write-comment-btn {
+    grid-area: update;
   }
 }
