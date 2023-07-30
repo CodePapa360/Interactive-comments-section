@@ -3,39 +3,27 @@
 
 Challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges)
 
+<h2>
+
+[🚀Live Site](https://interactive-comments-section-codepapa360.vercel.app/)
+|||
+[💡Frontend Mentor]()
+
+</h2>
 </div>
 
 <!-- Badges -->
 <div align="center">
 
-<!-- Live -->
-<a href="https://interactive-comments-section-codepapa360.vercel.app/">
-    <img src="https://custom-icon-badges.demolab.com/badge/Live%20Demo-blue?style=for-the-badge&logo=live360&labelColor=666666" alt="Live Demo" />
-</a>
-
-<!-- Frontend Mentor -->
-<a href="#">
-    <img src="https://img.shields.io/badge/Frontendmentor-100000?style=for-the-badge&logo=frontendmentor&logoColor=white&labelColor=666666&color=2490A9"  alt="FrontendMentor">
-</a>
-</div>
-
-<div align="center">
-<!-- Status -->
-
-<!-- <img src="https://img.shields.io/badge/Status-Incomplete-red?style=flat" alt="Status" /> -->
-
 <img src="https://img.shields.io/badge/Status-Completed-success?style=flat" alt="Status" />
 
 <!-- Liceensee -->
 <img src="https://img.shields.io/badge/License-MIT-blue?style=flat" alt="License" />
+
 </div>
 
-<hr>
-
-<div align="center">
-
-<p>
-
+<p align="center">
+This is a web application that showcases an interactive comments section. Users can add new comments, reply to existing comments, edit their own comments, and vote on comments. The project follows the `Model-View-Controller (MVC)` architectural pattern to separate data, presentation, and user interaction. Additionally, the `Publisher-Subscriber` pattern is utilized for event handling, enhancing the modularity and maintainability of the codebase.
 </p>
 
 <!-- Screenshot -->
@@ -45,56 +33,106 @@ Challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges)
 
 </a>
 
-</div>
+## Technologies Used
 
-## The challenge
+- Vanilla JavaScript: The core language used for application logic and event handling.
+- SASS: Used for styling and layout.
+- HTML
+
+## Project Structure
+
+The project follows the MVC pattern to organize the code into three main components:
+
+1. **Model (model.js):**
+
+   - Handles data management and storage.
+   - Provides methods for storing, retrieving, and updating comments.
+   - Implements voting functionality for comments.
+   - Manages the current user data and vote history.
+
+```javascript
+export const storeComment = async function (repliedToId, comment, parentId) {
+  // ... code for storing a new comment or reply ...
+};
+
+export const deleteComment = function (parentId, mainId) {
+  // ... code for deleting a comment or reply ...
+};
+```
+
+2. **View (commentView.js, deleteModalView.js, editView.js, newCommentView.js, replyView.js, scoreView.js):**
+
+   - Responsible for the presentation and rendering of data to the DOM.
+   - Utilizes the generated HTML markup templates to display comments and other elements.
+   - Implements methods to render main comments, replied comments, edit fields, delete modals, and reply fields.
+
+```javascript
+class CommentView {
+  renderMainComment(data) {
+    // ... code for rendering the main comment to the DOM ...
+  }
+
+  renderRepliedComment(data) {
+    // ... code for rendering a replied comment to the DOM ...
+  }
+
+  // ... other rendering methods ...
+}
+```
+
+3. **Controller (controller.js):**
+   - Acts as the middleman between the Model and View components.
+   - Implements event listeners using the `Publisher-Subscriber` pattern to handle user interactions.
+   - Connects user actions to corresponding Model methods for data manipulation.
+   - Utilizes View methods to display updated data to the user.
+
+```javascript
+const controlNewComment = async function () {
+  // ... code for handling the addition of a new comment ...
+};
+
+const controlReplyComment = async function (repliedToId, comment, parentId) {
+  // ... code for handling the addition of a reply to a comment ...
+};
+
+// ... other control functions ...
+```
+
+### Publisher-Subscriber (Pub-Sub) pattern:
+
+The Pub-Sub pattern is a design pattern where multiple components `(subscribers)` subscribe to `events` published by a central component `(publisher)`. Subscribers are notified whenever a relevant `event` occurs.
+
+```javascript
+// Example from controller.js
+const init = function () {
+  editView.addHandlerEditBtn(controlEditComment);
+  scoreView.addHandlerVoting(controlVoting);
+  replyView.addHandlerReplyBtn(controlReplyComment);
+};
+
+init();
+```
+
+## Key Features
 
 Users should be able to:
 
-- View the optimal layout for the app depending on their device's screen size
-- See hover states for all interactive elements on the page
-- Create, Read, Update, and Delete comments and replies
-- Upvote and downvote comments
-- **Bonus**: If you're building a purely front-end project, use `localStorage` to save the current state in the browser that persists when the browser is refreshed.
-- **Bonus**: Instead of using the `createdAt` strings from the `data.json` file, try using timestamps and dynamically track the time since the comment or reply was posted.
+- Create, Read, Update, and Delete comments and replies.
+- Upvote and downvote comments.
+- **Bonus**: Utilized `localStorage` to save the current state in the browser and persist when the browser is refreshed.
+- **Bonus**: Instead of using the `createdAt` strings from the `data.json` file, I have used timestamps and dynamically track the time since the comment or reply was posted.
 
-## Built with
+## What I Learned:
 
-- Semantic HTML5 markup
-- Mobile-first workflow
-- CSS custom properties
-- CSS Grid
-- JavaScript
-- NPM
-- [Webpack - a module bundler](https://webpack.js.org/)
+The MVC pattern helped me organize my code and separate different parts of the application. It made it easier to manage data, handle user interactions, and update the user interface without making everything messy. The Model represents the data and project logic, the View is responsible for the user interface, and the Controller acts as the middleman between the Model and View.
 
-## What I Learned
+On the other hand, the Pub-Sub method provided a way for different parts of the application to communicate with each other without knowing each other's details. It's like having a bunch of people (subscribers) listening for updates from a central place (publisher). When something changes, the publisher notifies all the subscribers, and they can react accordingly.
 
-## Installation
+By using these patterns, I was able to create a more organized and maintainable application. It also helped me handle user interactions and update the comments section dynamically without reloading the page. I learned how to manage data efficiently, display it on the screen, and handle user interactions smoothly.
 
-- Clone this repo:
+This project built upon my previous experience with the [Forkify](https://github.com/CodePapa360/Forkify-Recipe-App) app, where I first encountered these patterns. Through practice and application, I gained more confidence in using these patterns effectively and understanding their benefits in real-world projects.
 
-```sh
-git clone https://github.com/CodePapa360/Interactive-comments-section.git
-```
-
-- Install dependencies:
-
-```sh
-npm install
-```
-
-- Build command:
-
-```sh
-npm run build
-```
-
-- Live server:
-
-```sh
-npm start
-```
+Overall, it was a great learning experience, and I'm excited to use these skills in future projects to create even better and more user-friendly web applications.
 
 ## Author
 
@@ -107,14 +145,10 @@ npm start
 
 Feel free to contact me with any questions or feedback!
 
-## Show your support
-
-Give a ⭐️ if you liked this project!
-
 ## Acknowledgments
 
-Special thanks to Frontend Mentor for providing such an amazing platform to practice and improve my frontend skills.
+This project was inspired by the "Interactive Comments Section" challenge from Frontend Mentor. Special thanks to Frontend Mentor for providing the design and specifications for this project.
 
 ## License
 
-This project is licensed under the [MIT](https://github.com/CodePapa360/Interactive-comments-section/blob/main/LICENSE.md) license, which means you can use, modify, and distribute the code as you wish. If you have any questions or feedback, feel free to reach out. Thank you for considering my code!
+This project is licensed under the [MIT](https://github.com/CodePapa360/Interactive-comments-section/blob/main/LICENSE.md) License - see the LICENSE file for details.

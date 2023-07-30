@@ -1,7 +1,7 @@
 {
   "name": "interactive-comments-section",
   "version": "1.0.0",
-  "description": "<h1 align=\"center\">Interactive comments section</h1> <div align=\"center\">",
+  "description": "Interactive comments section",
   "main": "index.js",
   "scripts": {
     "build": "sass src/sass:src/css"
