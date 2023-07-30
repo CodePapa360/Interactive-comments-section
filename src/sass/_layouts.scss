@@ -194,24 +194,35 @@ main {
       margin-bottom: auto;
     }
 
-    .action-buttons {
-      flex-direction: column;
-
-      button {
-        width: 100%;
-      }
-    }
-
     .write-comment-btn {
       margin-bottom: auto;
     }
   }
 
-  .action-buttons {
-    display: flex;
-    gap: 1rem;
-    width: fit-content;
+  .reply-footer-buttons {
     margin-left: auto;
+    display: grid;
+    gap: 1rem;
+    grid-template-areas: "cancel reply";
+    grid-template-columns: auto auto;
+
+    @media screen and (min-width: $bp-medium) {
+      grid-template-areas:
+        "reply"
+        "cancel";
+
+      > * {
+        width: 100%;
+      }
+    }
+
+    .submit-reply {
+      grid-area: reply;
+    }
+
+    .cancel-reply {
+      grid-area: cancel;
+    }
   }
 
   .write-comment-avater {

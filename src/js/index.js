@@ -1,22 +1,22 @@
 "use strict";
 import * as model from "./model.js";
-import uiComment from "./View/CommentView.js";
-import uiDeleteModal from "./View/DeleteModalView.js";
-import uiEdit from "./View/EditView.js";
-import uiNewComment from "./View/NewCommentView.js";
-import uiReply from "./View/ReplyView.js";
-import uiScore from "./View/ScoreView.js";
+import commentView from "./View/CommentView.js";
+import deleteModalView from "./View/DeleteModalView.js";
+import editView from "./View/EditView.js";
+import newCommentView from "./View/NewCommentView.js";
+import replyView from "./View/ReplyView.js";
+import scoreView from "./View/ScoreView.js";
 
 const controlNewComment = async function () {
   try {
     //Getting the new comment content
-    const comment = uiNewComment.getNewComment();
+    const comment = newCommentView.getNewComment();
     if (!comment) return;
 
     //Storing comment data
     const storedComment = await model.storeComment(false, comment, false);
 
-    uiComment.renderMainComment(storedComment);
+    commentView.renderMainComment(storedComment);
   } catch (err) {
     console.log(err);
   }
@@ -27,7 +27,7 @@ const controlNewComment = async function () {
 const controlReplyComment = async function (repliedToId, comment, parentId) {
   if (!comment) {
     const replyInfo = model.getReplyUserInfo();
-    uiReply.renderReplyField(repliedToId, replyInfo);
+    replyView.renderReplyField(repliedToId, replyInfo);
     return;
   }
 
@@ -37,7 +37,7 @@ const controlReplyComment = async function (repliedToId, comment, parentId) {
     +parentId
   );
 
-  uiComment.renderRepliedComment(storedReply);
+  commentView.renderRepliedComment(storedReply);
 };
 
 // editing
@@ -45,7 +45,7 @@ const controlEditComment = function (parentId, mainId, comment) {
   if (!comment) {
     const editCommentData = model.getEditCommentData(+parentId, +mainId);
 
-    uiEdit.renderEditingField(editCommentData);
+    editView.renderEditingField(editCommentData);
     return;
   }
 
@@ -55,33 +55,33 @@ const controlEditComment = function (parentId, mainId, comment) {
     comment
   );
 
-  uiComment.renderUpdatedComment(updatedComment);
+  commentView.renderUpdatedComment(updatedComment);
 };
 
 // Delete comment
 const controlDeleteComment = function (parentId, mainId) {
-  uiDeleteModal.renderModal(parentId, mainId, deleteCommentHandler);
+  deleteModalView.renderModal(parentId, mainId, deleteCommentHandler);
 };
 
 const deleteCommentHandler = function (parentId, mainId) {
   model.deleteComment(+parentId, +mainId);
-  uiDeleteModal.deleteCommentFromDOM(parentId, mainId);
+  deleteModalView.deleteCommentFromDOM(parentId, mainId);
 };
 
 //Voting
 const controlVoting = function (parentId, mainId, vote) {
   const score = model.getScore(+parentId, +mainId, vote);
-  uiScore.renderScore(mainId, score);
+  scoreView.renderScore(mainId, score);
 };
 
 const init = function () {
-  uiNewComment.addHandlerNewComment(controlNewComment);
-  uiEdit.addHandlerEditBtn(controlEditComment);
-  uiEdit.addHandlerUpdateBtn(controlEditComment);
-  uiDeleteModal.addHandlerDeleteBtn(controlDeleteComment);
-  uiScore.addHandlerVoting(controlVoting);
-  uiReply.addHandlerReplyBtn(controlReplyComment);
-  uiReply.addHandlerSubmitReply(controlReplyComment);
+  newCommentView.addHandlerNewComment(controlNewComment);
+  editView.addHandlerEditBtn(controlEditComment);
+  editView.addHandlerUpdateBtn(controlEditComment);
+  deleteModalView.addHandlerDeleteBtn(controlDeleteComment);
+  scoreView.addHandlerVoting(controlVoting);
+  replyView.addHandlerReplyBtn(controlReplyComment);
+  replyView.addHandlerSubmitReply(controlReplyComment);
 };
 
 init();
@@ -95,7 +95,7 @@ const loadMainComment = function (data) {
   const returnedData = model.processMainComment(data);
 
   // 2. render data to the ui and that function should render  based on slef or else comment
-  uiComment.renderMainComment(returnedData);
+  commentView.renderMainComment(returnedData);
 };
 
 const loadRepliedComment = function (data, parentId) {
@@ -103,7 +103,7 @@ const loadRepliedComment = function (data, parentId) {
   const returnedData = model.processRepliedComment(data, parentId);
 
   // 2. render data to the ui and that function should render based on slef or else comment and create container based on the "needContainer" property.
-  uiComment.renderRepliedComment(returnedData);
+  commentView.renderRepliedComment(returnedData);
 };
 
 const controlLoad = async function () {

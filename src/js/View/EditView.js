@@ -83,7 +83,7 @@ class UiEdit {
                 <span>Delete</span>
               </button>
     
-              <button disabled class="action-btn edit-btn" type="button">
+              <button disabled="true" class="action-btn edit-btn" type="button">
                 <img src="./images/icon-edit.svg" alt="Edit icon" />
                 <span>Edit</span>
               </button>

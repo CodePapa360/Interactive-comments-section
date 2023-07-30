@@ -7,7 +7,7 @@ class uiReply {
       const btn = e.target.closest(".reply-btn");
       if (!btn) return;
 
-      btn.setAttribute("disabled", "");
+      btn.setAttribute("disabled", "true");
       const id = e.target.closest(".comment-wrapper").dataset.id;
       handler(id, false, false);
     });
@@ -42,9 +42,9 @@ class uiReply {
                 placeholder="Add a comment..."
                 ></textarea>
 
-                <div class="action-buttons">
-                  <button class="write-comment-btn submit-reply" type="button">Reply</button>
+                <div class="reply-footer-buttons">
                   <button class="cancel-reply" type="button">Cancel</button>
+                  <button class="write-comment-btn submit-reply" type="button">Reply</button>
                 </div>
           </div>
         </div>
