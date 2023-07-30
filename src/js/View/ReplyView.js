@@ -7,7 +7,7 @@ class uiReply {
       const btn = e.target.closest(".reply-btn");
       if (!btn) return;
 
-      btn.setAttribute("disabled", "true");
+      btn.classList.remove("reply-btn");
       const id = e.target.closest(".comment-wrapper").dataset.id;
       handler(id, false, false);
     });
@@ -20,8 +20,8 @@ class uiReply {
 
     const cancelBtn = wrapper.querySelector(".cancel-reply");
     cancelBtn.addEventListener("click", function () {
-      const btnReply = wrapper.querySelector(".reply-btn");
-      btnReply.removeAttribute("disabled");
+      const btnReply = wrapper.querySelector(".action-btn");
+      btnReply.classList.add("reply-btn");
       wrapper.querySelector(".reply-comment").remove();
     });
   }
@@ -69,8 +69,8 @@ class uiReply {
 
       const comment = parentEl.querySelector(".write-comment-field").value;
 
-      const btnReply = parentEl.querySelector(".reply-btn");
-      btnReply.removeAttribute("disabled");
+      const btnReply = parentEl.querySelector(".action-btn");
+      btnReply.classList.add("reply-btn");
       parentEl.querySelector(".reply-comment").remove();
 
       handler(repliedToId, comment, parentId);
