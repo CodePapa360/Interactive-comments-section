@@ -7,23 +7,23 @@ const allData = {
 };
 
 export const load = async function () {
-  if (localStorage.getItem("allData")) {
-    const jsonData = JSON.parse(localStorage.getItem("allData"));
+  const localStorageData = localStorage.getItem("allData");
+  const JsonPath = "./json/data.json";
 
-    allData.currentUser = jsonData.currentUser;
-    allData.comments = jsonData.comments;
-    allData.voted = jsonData.voted;
+  if (localStorageData) {
+    const jsonData = JSON.parse(localStorageData);
+    const { currentUser, comments, voted } = jsonData;
+
+    allData.currentUser = currentUser;
+    allData.comments = comments;
+    allData.voted = voted;
 
     return jsonData;
   } else {
-    const JsonPath = "./json/data.json";
     const jsonData = await fetch(JsonPath).then((res) => res.json());
+    const currentUser = { ...jsonData.currentUser, voted: {} };
 
-    allData.currentUser = {
-      ...(await jsonData.currentUser),
-      voted: {},
-    };
-
+    allData.currentUser = currentUser;
     allData.comments = jsonData.comments;
     updateStorage();
 
@@ -32,7 +32,6 @@ export const load = async function () {
 };
 
 const updateStorage = function () {
-  if (localStorage.getItem("allData")) localStorage.clear();
   localStorage.setItem("allData", JSON.stringify(allData));
 };
 
