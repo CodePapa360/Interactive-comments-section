@@ -1,6 +1,15 @@
 class UiComment {
   _allCommentContainer = document.querySelector(".all-comments-container");
 
+  scrolTo(id) {
+    const com = this._allCommentContainer.querySelector(`.key${id}`);
+
+    com.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  }
+
   //1. Render main comment.
   renderMainComment(data) {
     const markup = `

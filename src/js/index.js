@@ -38,6 +38,7 @@ const controlReplyComment = async function (repliedToId, comment, parentId) {
   );
 
   commentView.renderRepliedComment(storedReply);
+  commentView.scrolTo(storedReply.id);
 };
 
 // editing
