@@ -26,38 +26,44 @@ class DeleteModalView {
     const btnYes = document.querySelector(".btn-yes");
 
     const handleNoButtonClick = () => {
-      overlay.remove();
-      modal.remove();
-      this._body.style.overflow = null;
+      fading();
+
+      setTimeout(() => {
+        overlay.remove();
+        modal.remove();
+        this._body.style.overflow = null;
+      }, 200);
     };
 
     const handleYesButtonClick = () => {
-      handler(parentId, mainId);
-      overlay.remove();
-      modal.remove();
-      this._body.style.overflow = null;
+      fading();
+
+      setTimeout(() => {
+        handler(parentId, mainId);
+        overlay.remove();
+        modal.remove();
+        this._body.style.overflow = null;
+      }, 200);
     };
 
     btnNo.addEventListener("click", handleNoButtonClick);
     overlay.addEventListener("click", handleNoButtonClick);
     btnYes.addEventListener("click", handleYesButtonClick);
-  }
 
-  deleteCommentFromDOM(parentId, mainId) {
-    const dom = this._allCommentContainer.querySelector(`.key${mainId}`);
+    const fading = function () {
+      overlay.classList.toggle("hide");
+      modal.classList.toggle("hide");
+    };
 
-    if (!parentId) {
-      if (dom) dom.closest(".each-comment").remove();
-      return;
-    }
-
-    dom.remove();
+    setTimeout(() => {
+      fading();
+    }, 10);
   }
 
   renderModal(parentId, mainId, handler) {
     const markup = `
-            <div class="overlay"></div>
-            <div class="modal">
+            <div class="overlay hide"></div>
+            <div class="modal hide">
               <h1>Delete comment</h1>
               <p>
                 Are you sure you want to delete this comment? This will remove the comment and can't be undone.
@@ -71,7 +77,19 @@ class DeleteModalView {
 
     this._body.insertAdjacentHTML("afterbegin", markup);
     this.attachModalEventListeners(parentId, mainId, handler);
+
     this._body.style.overflow = "hidden";
+  }
+
+  deleteCommentFromDOM(parentId, mainId) {
+    const dom = this._allCommentContainer.querySelector(`.key${mainId}`);
+
+    if (!parentId) {
+      if (dom) dom.closest(".each-comment").remove();
+      return;
+    }
+
+    dom.remove();
   }
 }
 

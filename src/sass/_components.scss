@@ -8,6 +8,9 @@
   border-radius: 10px;
   width: calc(100% - 2rem);
   max-width: 22rem;
+  transition: all 0.5s ease;
+  opacity: 1;
+  visibility: visible;
 
   z-index: 100;
 
@@ -60,4 +63,32 @@
   top: 0;
   left: 0;
   z-index: 50;
+  transition: all 0.5s ease;
+  opacity: 1;
+  visibility: visible;
+}
+//////////
+.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.comment {
+  animation-name: fading;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+  animation-duration: 0.8s;
+}
+
+@keyframes fading {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+    background-color: var(--white);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
