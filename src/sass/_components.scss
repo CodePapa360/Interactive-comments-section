@@ -8,7 +8,7 @@
   border-radius: 10px;
   width: calc(100% - 2rem);
   max-width: 22rem;
-  transition: all 0.5s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   opacity: 1;
   visibility: visible;
 
@@ -63,7 +63,7 @@
   top: 0;
   left: 0;
   z-index: 50;
-  transition: all 0.5s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   opacity: 1;
   visibility: visible;
 }
