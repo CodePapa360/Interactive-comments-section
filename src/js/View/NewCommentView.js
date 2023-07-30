@@ -1,4 +1,4 @@
-class uiNewComment {
+class NewCommentView {
   _newCommentInputEl = document.querySelector(".new-comment");
 
   getNewComment() {
@@ -26,4 +26,4 @@ class uiNewComment {
   }
 }
 
-export default new uiNewComment();
+export default new NewCommentView();

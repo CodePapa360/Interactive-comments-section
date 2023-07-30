@@ -1,14 +1,5 @@
-class UiComment {
+class CommentView {
   _allCommentContainer = document.querySelector(".all-comments-container");
-
-  scrolTo(id) {
-    const com = this._allCommentContainer.querySelector(`.key${id}`);
-
-    com.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
-  }
 
   //1. Render main comment.
   renderMainComment(data) {
@@ -43,6 +34,16 @@ class UiComment {
     const parentEl = this._allCommentContainer.querySelector(`.key${data.id}`);
 
     parentEl.innerHTML = this.commentMarkup(data);
+  }
+
+  //Scroll to the new replied comment
+  scrolTo(id) {
+    const com = this._allCommentContainer.querySelector(`.key${id}`);
+
+    com.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
   }
 
   ////////////////////////////////
@@ -111,4 +112,4 @@ class UiComment {
   }
 }
 
-export default new UiComment();
+export default new CommentView();

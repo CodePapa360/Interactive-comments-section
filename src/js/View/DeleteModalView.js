@@ -1,4 +1,4 @@
-class UiDeleteModal {
+class DeleteModalView {
   _allCommentContainer = document.querySelector(".all-comments-container");
   _body = document.querySelector("body");
 
@@ -75,4 +75,4 @@ class UiDeleteModal {
   }
 }
 
-export default new UiDeleteModal();
+export default new DeleteModalView();

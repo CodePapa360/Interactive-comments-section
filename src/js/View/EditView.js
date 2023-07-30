@@ -1,4 +1,4 @@
-class UiEdit {
+class EditView {
   _allCommentContainer = document.querySelector(".all-comments-container");
 
   addHandlerEditBtn(handler) {
@@ -93,4 +93,4 @@ class UiEdit {
   }
 }
 
-export default new UiEdit();
+export default new EditView();

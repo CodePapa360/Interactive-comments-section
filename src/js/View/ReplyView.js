@@ -1,4 +1,4 @@
-class uiReply {
+class ReplyView {
   _allCommentContainer = document.querySelector(".all-comments-container");
 
   //////////////////////////////
@@ -78,4 +78,4 @@ class uiReply {
   }
 }
 
-export default new uiReply();
+export default new ReplyView();

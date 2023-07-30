@@ -1,4 +1,4 @@
-class Score {
+class ScoreView {
   _allCommentContainer = document.querySelector(".all-comments-container");
 
   addHandlerVoting(handler) {
@@ -26,4 +26,4 @@ class Score {
   }
 }
 
-export default new Score();
+export default new ScoreView();
