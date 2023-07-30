@@ -12,21 +12,29 @@ export const load = async function () {
 
   allData.currentUser = {
     ...(await jsonData.currentUser),
-    votted: {},
+    voted: {},
   };
 
   allData.comments = jsonData.comments;
 
   return jsonData;
 };
+
 //////////////////////////////
 //////////////////////////////
-export const vote = function (id, vote) {
-  const hasVot = allData.currentUser.votted.hasOwnProperty(id);
-  const targetComment = allData.comments.find((com) => com.id === id);
+export const getScore = function (parentId, mainId, vote) {
+  const hasVot = allData.currentUser.voted.hasOwnProperty(mainId);
+  let targetComment;
+
+  if (!parentId) {
+    targetComment = allData.comments.find((com) => com.id === mainId);
+  } else {
+    const targetParent = allData.comments.find((cmt) => cmt.id === parentId);
+    targetComment = targetParent.replies.find((cmt) => cmt.id === mainId);
+  }
 
   if (!hasVot) {
-    allData.currentUser.votted[id] = vote;
+    allData.currentUser.voted[mainId] = vote;
 
     if (vote === "up") {
       targetComment.score += 1;
@@ -39,20 +47,20 @@ export const vote = function (id, vote) {
     }
   }
 
-  const prevVote = allData.currentUser.votted[id];
+  const prevVote = allData.currentUser.voted[mainId];
 
   if (prevVote === vote) {
     return targetComment.score;
   }
 
   if (vote === "up") {
-    allData.currentUser.votted[id] = vote;
+    allData.currentUser.voted[mainId] = vote;
     targetComment.score += 2;
     return targetComment.score;
   }
 
   if (vote === "down") {
-    allData.currentUser.votted[id] = vote;
+    allData.currentUser.voted[mainId] = vote;
     targetComment.score -= 2;
     return targetComment.score;
   }

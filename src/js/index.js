@@ -1,10 +1,11 @@
 "use strict";
 import * as model from "./model.js";
-import uiComment from "./uiView/uiComment.js";
-import uiDeleteModal from "./uiView/uiDeleteModal.js";
-import uiEdit from "./uiView/uiEdit.js";
-import uiNewComment from "./uiView/uiNewComment.js";
-import uiReply from "./uiView/uiReply.js";
+import uiComment from "./View/CommentView.js";
+import uiDeleteModal from "./View/DeleteModalView.js";
+import uiEdit from "./View/EditView.js";
+import uiNewComment from "./View/NewCommentView.js";
+import uiReply from "./View/ReplyView.js";
+import uiScore from "./View/ScoreView.js";
 
 const controlNewComment = async function () {
   try {
@@ -29,8 +30,6 @@ const controlReplyComment = async function (repliedToId, comment, parentId) {
     uiReply.renderReplyField(repliedToId, replyInfo);
     return;
   }
-
-  console.log(repliedToId, comment, parentId);
 
   const storedReply = await model.storeComment(
     +repliedToId,
@@ -69,30 +68,18 @@ const deleteCommentHandler = function (parentId, mainId) {
   uiDeleteModal.deleteCommentFromDOM(parentId, mainId);
 };
 
-///////////////////////////////////////
-//////////////////////////////////////
-//////////////////////////////////////
-
-// ///////////////////////
-// //Reply button control
-// const controlReplyComment = async function (id) {
-//   const replyInfo = await model.getReplyInfo();
-//   replyFieldView.renderReplyField(id, replyInfo);
-// };
-
-// const controlSubmitReplyComment = async function (id, repliedComment) {
-//   // console.log(id, repliedComment);
-//   const storeReply = await model.submitReply(+id, repliedComment);
-//   // console.log(storeReply);
-//   replyView.renderReply(storeReply);
-// };
+//Voting
+const controlVoting = function (parentId, mainId, vote) {
+  const score = model.getScore(+parentId, +mainId, vote);
+  uiScore.renderScore(mainId, score);
+};
 
 const init = function () {
   uiNewComment.addHandlerNewComment(controlNewComment);
   uiEdit.addHandlerEditBtn(controlEditComment);
   uiEdit.addHandlerUpdateBtn(controlEditComment);
   uiDeleteModal.addHandlerDeleteBtn(controlDeleteComment);
-  // commentView.addHandlerVotting(controlVotting);
+  uiScore.addHandlerVoting(controlVoting);
   uiReply.addHandlerReplyBtn(controlReplyComment);
   uiReply.addHandlerSubmitReply(controlReplyComment);
 };

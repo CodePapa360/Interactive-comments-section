@@ -44,17 +44,17 @@ main {
   grid-template-areas:
     "user user"
     "comment comment"
-    "votting actions";
+    "voting actions";
 
   @media screen and (min-width: $bp-medium) {
     grid-template-columns: max-content auto auto;
 
     grid-template-areas:
-      "votting user actions"
-      "votting comment comment";
+      "voting user actions"
+      "voting comment comment";
 
     // voting section
-    .comment-votting {
+    .comment-voting {
       flex-direction: column;
       margin-bottom: auto;
     }
@@ -104,8 +104,8 @@ main {
   }
 
   // voting section
-  .comment-votting {
-    grid-area: votting;
+  .comment-voting {
+    grid-area: voting;
     display: flex;
     align-items: center;
     gap: 0.2rem;
@@ -119,7 +119,7 @@ main {
       font-weight: 500;
     }
 
-    .btn-votting {
+    .btn-voting {
       background-color: transparent;
       border: none;
       cursor: pointer;
@@ -271,18 +271,18 @@ main {
     "user user"
     "comment comment"
     "update update"
-    "votting actions";
+    "voting actions";
 
   @media screen and (min-width: $bp-medium) {
     grid-template-columns: max-content auto auto;
 
     grid-template-areas:
-      "votting user actions"
-      "votting comment comment"
+      "voting user actions"
+      "voting comment comment"
       "update update update";
 
     // voting section
-    .comment-votting {
+    .comment-voting {
       flex-direction: column;
       margin-bottom: auto;
     }

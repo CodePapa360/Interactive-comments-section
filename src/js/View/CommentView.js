@@ -63,14 +63,14 @@ class UiComment {
           ${data.content}
           </p>
 
-          <div class="comment-votting">
-            <button data-vote="up" class="btn-plus btn-votting" type="button">
+          <div class="comment-voting">
+            <button data-vote="up" class="btn-plus btn-voting" type="button">
               <img src="./images/icon-plus.svg" alt="Plus icon" />
             </button>
 
             <p class="score">${data.score}</p>
  
-            <button data-vote="down" class="btn-minus btn-votting" type="button">
+            <button data-vote="down" class="btn-minus btn-voting" type="button">
               <img src="./images/icon-minus.svg" alt="Minus icon" />
             </button>
           </div>

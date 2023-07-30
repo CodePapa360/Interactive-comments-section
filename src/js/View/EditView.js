@@ -65,14 +65,14 @@ class UiEdit {
     
             <button class="write-comment-btn update-btn" type="button">Update</button>
     
-            <div class="comment-votting">
-              <button class="btn-plus btn-votting" type="button">
+            <div class="comment-voting">
+              <button class="btn-plus btn-voting" type="button">
                 <img src="./images/icon-plus.svg" alt="Plus icon" />
               </button>
     
               <p class="score">${data.score}</p>
     
-              <button class="btn-minus btn-votting" type="button">
+              <button class="btn-minus btn-voting" type="button">
                 <img src="./images/icon-minus.svg" alt="Minus icon" />
               </button>
             </div>
