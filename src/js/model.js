@@ -7,17 +7,33 @@ const allData = {
 };
 
 export const load = async function () {
-  const JsonPath = "./json/data.json";
-  const jsonData = await fetch(JsonPath).then((res) => res.json());
+  if (localStorage.getItem("allData")) {
+    const jsonData = JSON.parse(localStorage.getItem("allData"));
 
-  allData.currentUser = {
-    ...(await jsonData.currentUser),
-    voted: {},
-  };
+    allData.currentUser = jsonData.currentUser;
+    allData.comments = jsonData.comments;
+    allData.voted = jsonData.voted;
 
-  allData.comments = jsonData.comments;
+    return jsonData;
+  } else {
+    const JsonPath = "./json/data.json";
+    const jsonData = await fetch(JsonPath).then((res) => res.json());
 
-  return jsonData;
+    allData.currentUser = {
+      ...(await jsonData.currentUser),
+      voted: {},
+    };
+
+    allData.comments = jsonData.comments;
+    updateStorage();
+
+    return jsonData;
+  }
+};
+
+const updateStorage = function () {
+  if (localStorage.getItem("allData")) localStorage.clear();
+  localStorage.setItem("allData", JSON.stringify(allData));
 };
 
 //////////////////////////////
@@ -38,11 +54,13 @@ export const getScore = function (parentId, mainId, vote) {
 
     if (vote === "up") {
       targetComment.score += 1;
+      updateStorage();
       return targetComment.score;
     }
 
     if (vote === "down") {
       targetComment.score -= 1;
+      updateStorage();
       return targetComment.score;
     }
   }
@@ -50,18 +68,21 @@ export const getScore = function (parentId, mainId, vote) {
   const prevVote = allData.currentUser.voted[mainId];
 
   if (prevVote === vote) {
+    updateStorage();
     return targetComment.score;
   }
 
   if (vote === "up") {
     allData.currentUser.voted[mainId] = vote;
     targetComment.score += 2;
+    updateStorage();
     return targetComment.score;
   }
 
   if (vote === "down") {
     allData.currentUser.voted[mainId] = vote;
     targetComment.score -= 2;
+    updateStorage();
     return targetComment.score;
   }
 };
@@ -105,6 +126,7 @@ export const storeComment = async function (repliedToId, comment, parentId) {
 
     if (!repliedToId && !parentId) {
       allData.comments.push(commentObject);
+      updateStorage();
       return processMainComment(commentObject);
     }
 
@@ -115,6 +137,7 @@ export const storeComment = async function (repliedToId, comment, parentId) {
 
       commentObject.replyingTo = targetComment.user.username;
       targetComment.replies.push(commentObject);
+      updateStorage();
       return processRepliedComment(commentObject, repliedToId);
     }
 
@@ -125,6 +148,7 @@ export const storeComment = async function (repliedToId, comment, parentId) {
 
     commentObject.replyingTo = targetUser;
     targetParent.replies.push(commentObject);
+    updateStorage();
     return processRepliedComment(commentObject, parentId);
   } catch (err) {
     console.error(`${err} 💥💥💥`);
@@ -163,6 +187,7 @@ export const getUpdatedCommentData = function (parentId, mainId, comment) {
   if (!parentId) {
     const targetComment = allData.comments.find((com) => com.id === mainId);
     targetComment.content = comment;
+    updateStorage();
 
     return {
       ...targetComment,
@@ -175,6 +200,7 @@ export const getUpdatedCommentData = function (parentId, mainId, comment) {
   const targetComment = targetParent.replies.find((cmt) => cmt.id === mainId);
 
   targetComment.content = comment;
+  updateStorage();
 
   return {
     ...targetComment,
@@ -188,6 +214,7 @@ export const deleteComment = function (parentId, mainId) {
   if (!parentId) {
     const index = allData.comments.findIndex((com) => com.id === mainId);
     allData.comments.splice(index, 1);
+    updateStorage();
     return;
   }
 
@@ -195,5 +222,6 @@ export const deleteComment = function (parentId, mainId) {
   const index = targetParent.replies.findIndex((cmt) => cmt.id === mainId);
 
   targetParent.replies.splice(index, 1);
+  updateStorage();
   return;
 };

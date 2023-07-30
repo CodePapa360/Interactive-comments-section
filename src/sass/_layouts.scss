@@ -162,7 +162,7 @@ main {
 // replied container
 .replied-comment-container {
   padding-left: 1rem;
-  border-left: 2px solid hsl(233, 17%, 90%);
+  border-left: 2px solid var(--indent-color);
 
   @media screen and (min-width: $bp-medium) {
     padding-left: 1.5rem;
