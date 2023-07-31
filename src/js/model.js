@@ -1,6 +1,5 @@
 import { formatDate } from "./helpers.js";
 import { getUniqueId } from "./helpers.js";
-import jsonFile from "../json/data.json";
 
 const allData = {
   currentUser: null,
@@ -9,7 +8,7 @@ const allData = {
 
 export const load = async function () {
   const localStorageData = localStorage.getItem("allData");
-  const JsonPath = jsonFile;
+  const JsonPath = "./json/data.json";
 
   if (localStorageData) {
     const jsonData = JSON.parse(localStorageData);
@@ -22,7 +21,6 @@ export const load = async function () {
     return jsonData;
   } else {
     const jsonData = await fetch(JsonPath).then((res) => res.json());
-    console.log(jsonData);
     const currentUser = { ...jsonData.currentUser, voted: {} };
 
     allData.currentUser = currentUser;

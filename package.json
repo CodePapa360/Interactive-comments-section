@@ -4,11 +4,7 @@
   "description": "Interactive comments section",
   "main": "controller.html",
   "scripts": {
-    "copy-img": "node copy-images.js",
-    "dev-bundle": "webpack serve --mode development",
-    "bundle": "webpack --mode production",
-    "start": "npm-run-all dev-bundle copy-img",
-    "build": "npm-run-all bundle copy-img"
+    "build": "webpack --mode production"
   },
   "author": "Alamin",
   "license": "MIT",
