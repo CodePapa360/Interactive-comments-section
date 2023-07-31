@@ -92,22 +92,17 @@ init();
 ////////////////////////////////////////
 
 const loadMainComment = function (data) {
-  // 1. store data to model and the returned object should have a property wheather it is me or not
   const returnedData = model.processMainComment(data);
-
-  // 2. render data to the ui and that function should render  based on slef or else comment
   commentView.renderMainComment(returnedData);
 };
 
 const loadRepliedComment = function (data, parentId) {
-  // 1. store data to the model and it will store the comment based on the parentComment (id args) and return wheather it is me or not property and also a property tells if it's the first reply or not.
   const returnedData = model.processRepliedComment(data, parentId);
-
-  // 2. render data to the ui and that function should render based on slef or else comment and create container based on the "needContainer" property.
   commentView.renderRepliedComment(returnedData);
 };
 
-const controlLoad = async function () {
+// Loading comments after refreshing the page or visiting the site first time.
+const controlPageLoad = async function () {
   const jsonData = await model.load();
   const { comments } = await jsonData;
 
@@ -126,9 +121,9 @@ const controlLoad = async function () {
   }
 };
 
-controlLoad();
+controlPageLoad();
 
-//Some styling
-const contai = document.querySelector(".container");
+//Some initial styling
+const container = document.querySelector(".container");
 const footer = document.querySelector("footer").scrollHeight;
-contai.style.minHeight = `calc(100vh - 2.5rem - ${footer}px)`;
+container.style.minHeight = `calc(100vh - 2.5rem - ${footer}px)`;
