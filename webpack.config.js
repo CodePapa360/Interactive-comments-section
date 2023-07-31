@@ -8,11 +8,6 @@ module.exports = {
     filename: "controller.js",
   },
   mode: "development",
-  devServer: {
-    port: 2222,
-    hot: false,
-    open: true,
-  },
   module: {
     rules: [
       {
