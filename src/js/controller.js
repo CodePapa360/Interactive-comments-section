@@ -1,5 +1,4 @@
 "use strict";
-import "../sass/main.scss";
 import * as model from "./model.js";
 import commentView from "./View/commentView.js";
 import deleteModalView from "./View/deleteModalView.js";
