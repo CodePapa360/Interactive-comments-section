@@ -2,21 +2,29 @@
   "name": "interactive-comments-section",
   "version": "1.0.0",
   "description": "Interactive comments section",
-  "main": "controller.js",
+  "main": "controller.html",
   "scripts": {
-    "serve:html": "browser-sync start --server --files './src/index.html'",
-    "serve:css": "sass ./src/sass/main.scss ./src/css/main.css --watch --no-source-map",
-    "start": "npm-run-all --parallel serve:*",
-    "build:sass": "sass ./src/sass/main.scss ./src/css/main.css --no-source-map",
-    "build:js": "terser ./src/js/controller.js --compress --mangle",
-    "ready": "npm-run-all build:*"
+    "copy-img": "node copy-images.js",
+    "dev-bundle": "webpack serve --mode development",
+    "bundle": "webpack --mode production",
+    "start": "npm-run-all dev-bundle copy-img",
+    "build": "npm-run-all bundle copy-img"
   },
   "author": "Alamin",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.29.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.3",
+    "fs-extra": "^11.1.1",
+    "html-loader": "^4.2.0",
+    "html-webpack-plugin": "^5.5.1",
+    "mini-css-extract-plugin": "^2.7.5",
+    "npm": "^9.8.1",
     "npm-run-all": "^4.1.5",
-    "sass": "^1.63.6",
-    "terser": "^5.19.2"
+    "sass": "^1.62.0",
+    "sass-loader": "^13.2.2",
+    "webpack": "^5.80.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.3"
   }
 }
