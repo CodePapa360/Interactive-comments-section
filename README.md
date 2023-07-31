@@ -123,6 +123,7 @@ Users should be able to:
 - Upvote and downvote comments.
 - **Bonus**: Utilized `localStorage` to save the current state in the browser and persist when the browser is refreshed.
 - **Bonus**: Instead of using the `createdAt` strings from the `data.json` file, I have used timestamps and dynamically track the time since the comment or reply was posted.
+- **Bonus**: Dark mode toggler.
 
 ## What I Learned:
 
