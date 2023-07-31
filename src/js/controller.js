@@ -1,11 +1,11 @@
 "use strict";
 import * as model from "./model.js";
-import commentView from "./View/uicommentView.js";
-import deleteModalView from "./View/uideleteModalView.js";
-import editView from "./View/uieditView.js";
-import newCommentView from "./View/uinewCommentView.js";
-import replyView from "./View/uireplyView.js";
-import scoreView from "./View/uiscoreView.js";
+import commentView from "./View/CommentView.js";
+import deleteModalView from "./View/DeleteModalView.js";
+import editView from "./View/EditView.js/index.js";
+import newCommentView from "./View/NewCommentView.js";
+import replyView from "./View/ReplyView.js";
+import scoreView from "./View/ScoreView.js";
 
 const controlNewComment = async function () {
   try {
