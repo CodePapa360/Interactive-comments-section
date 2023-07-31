@@ -6,7 +6,7 @@ Challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges)
 <h2>
 
 [🚀Live Site](https://interactive-comments-section-codepapa360.vercel.app/)
-|||
+||
 [💡Frontend Mentor]()
 
 </h2>
@@ -23,7 +23,7 @@ Challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges)
 </div>
 
 <p align="center">
-This is a web application that showcases an interactive comments section. Users can add new comments, reply to existing comments, edit their own comments, and vote on comments. The project follows the `Model-View-Controller (MVC)` architectural pattern to separate data, presentation, and user interaction. Additionally, the `Publisher-Subscriber` pattern is utilized for event handling, enhancing the modularity and maintainability of the codebase.
+This is a web application that showcases an interactive comments section. Users can add new comments, reply to existing comments, edit their own comments, and vote on comments. The project follows the <code>Model-View-Controller (MVC)</code> architectural pattern to separate data, presentation, and user interaction. Additionally, the <code>Publisher-Subscriber</code> pattern is utilized for event handling, enhancing the modularity and maintainability of the codebase.
 </p>
 
 <!-- Screenshot -->
@@ -58,6 +58,8 @@ export const storeComment = async function (repliedToId, comment, parentId) {
 export const deleteComment = function (parentId, mainId) {
   // ... code for deleting a comment or reply ...
 };
+
+// ... other model functions ...
 ```
 
 2. **View (commentView.js, deleteModalView.js, editView.js, newCommentView.js, replyView.js, scoreView.js):**
