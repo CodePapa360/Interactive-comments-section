@@ -29,7 +29,7 @@ This is a web application that showcases an interactive comments section. Users 
 <!-- Screenshot -->
 <a align="center" href="https://interactive-comments-section-codepapa360.vercel.app/">
 
-![Screenshot](./screenshots/Interactive-comments-section-screenshot-codepapa360.png)
+![Screenshot](./screenshots/Interactive-comments-section-preview-codepapa360.png)
 
 </a>
 
