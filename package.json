@@ -2,13 +2,18 @@
   "name": "interactive-comments-section",
   "version": "1.0.0",
   "description": "Interactive comments section",
-  "main": "controller.html",
+  "main": "index.html",
   "scripts": {
-    "build": "sass src/sass:src/css --no-source-map"
+    "build": "webpack --mode production"
   },
   "author": "Alamin",
   "license": "MIT",
   "devDependencies": {
-    "sass": "^1.62.0"
+    "css-loader": "^6.7.3",
+    "mini-css-extract-plugin": "^2.7.5",
+    "sass": "^1.62.0",
+    "sass-loader": "^13.2.2",
+    "webpack": "^5.80.0",
+    "webpack-cli": "^5.0.1"
   }
 }
