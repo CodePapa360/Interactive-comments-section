@@ -1,22 +1,52 @@
 ////////////////////////////
 // Timing function
 export const formatDate = function (inputDate) {
-  // console.log("From helper", inputDate);
   const relativeTimeRegex = /^\d+\s+\w+\s+ago$/i;
   if (relativeTimeRegex.test(inputDate)) return inputDate;
 
-  const date = new Date(inputDate);
+  const currentDate = new Date();
+  const timestamp = new Date(inputDate).getTime();
+  const currentTimestamp = currentDate.getTime();
+  const timeDifference = currentTimestamp - timestamp;
 
-  const calcDaysPassed = (date1, date2) =>
-    Math.round(Math.abs((date1 - date2) / (1000 * 60 * 60 * 24)));
+  const minute = 60 * 1000;
+  const hour = 60 * minute;
+  const day = 24 * hour;
+  const week = 7 * day;
+  const month = 30 * day;
+  const year = 365 * day;
 
-  const daysPassed = calcDaysPassed(new Date(), date);
-  if (daysPassed === 0) return "Today";
-  if (daysPassed === 1) return "Yesterday";
-  if (daysPassed <= 7) return `${daysPassed} days ago`;
-  else {
-    return new Intl.DateTimeFormat("Us").format(date);
+  if (timeDifference < minute) {
+    return "Just now";
   }
+
+  if (timeDifference < hour) {
+    const minutesAgo = Math.floor(timeDifference / minute);
+    return `${minutesAgo} minute${minutesAgo === 1 ? "" : "s"} ago`;
+  }
+
+  if (timeDifference < day) {
+    const hoursAgo = Math.floor(timeDifference / hour);
+    return `${hoursAgo} hour${hoursAgo === 1 ? "" : "s"} ago`;
+  }
+
+  if (timeDifference < week) {
+    const daysAgo = Math.floor(timeDifference / day);
+    return `${daysAgo} day${daysAgo === 1 ? "" : "s"} ago`;
+  }
+
+  if (timeDifference < month) {
+    const weeksAgo = Math.floor(timeDifference / week);
+    return `${weeksAgo} week${weeksAgo === 1 ? "" : "s"} ago`;
+  }
+
+  if (timeDifference < year) {
+    const monthsAgo = Math.floor(timeDifference / month);
+    return `${monthsAgo} month${monthsAgo === 1 ? "" : "s"} ago`;
+  }
+
+  const yearsAgo = Math.floor(timeDifference / year);
+  return `${yearsAgo} year${yearsAgo === 1 ? "" : "s"} ago`;
 };
 
 ///////////////////

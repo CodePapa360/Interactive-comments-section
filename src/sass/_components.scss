@@ -75,20 +75,30 @@
 
 .comment {
   animation-name: fading;
-  animation-timing-function: ease;
+  animation-timing-function: cubic-bezier(0.77, 0, 0.18, 1);
   animation-iteration-count: 1;
-  animation-duration: 0.8s;
+  animation-duration: 0.7s;
+}
+
+.update-comment {
+  animation-duration: 0.3s;
+}
+
+.write-comment {
+  animation-name: fading;
+  animation-timing-function: cubic-bezier(0.77, 0, 0.18, 1);
+  animation-iteration-count: 1;
+  animation-duration: 0.3s;
 }
 
 @keyframes fading {
   0% {
-    transform: scale(0.8);
+    transform: scale(0.8) translateY(-2rem);
     opacity: 0;
-    background-color: var(--white);
   }
 
   100% {
-    transform: scale(1);
+    transform: scale(1) translateY(0);
     opacity: 1;
   }
 }
