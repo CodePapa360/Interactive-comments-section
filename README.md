@@ -7,7 +7,7 @@ Challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges)
 
 [🚀Live Site](https://interactive-comments-section-codepapa360.vercel.app/)
 ||
-[💡Frontend Mentor]()
+[💡Frontend Mentor](https://www.frontendmentor.io/solutions/nested-comment-section-built-with-vanilla-js-mvc-and-pubsub-pattern-C4fL2vWc_l)
 
 </h2>
 </div>
